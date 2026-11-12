@@ -17,6 +17,10 @@ Kid Space is an Android app for the moment you hand your own phone to a child. Y
 It does not replace your launcher. Kid Space becomes the home app only while Kid mode is running, and gives the home screen back to your normal launcher when you leave.
 
 <p align="center">
+  <img src="docs/images/welcome.gif" width="330" alt="Animation: the parent's apps shrink into a locked card and slide away, and a separate Kid Space with the child's apps slides in">
+</p>
+
+<p align="center">
   <img src="docs/images/01-their-space.png" width="200" alt="Kid home with four allowed apps and a 30 minute timer">
   <img src="docs/images/03-choose-apps.png" width="200" alt="Choosing which apps the child may open">
   <img src="docs/images/04-time-limit.png" width="200" alt="Setting a time limit">
