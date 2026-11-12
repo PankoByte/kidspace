@@ -1,5 +1,6 @@
 package com.pankobyte.launcher.kid.setup
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,7 +13,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -23,14 +30,31 @@ import androidx.compose.ui.unit.sp
 import com.pankobyte.launcher.R
 import com.pankobyte.launcher.core.apps.AppEntry
 import com.pankobyte.launcher.core.apps.AppIcon
-import com.pankobyte.launcher.core.theme.LineIcons
 import com.pankobyte.launcher.core.theme.ParentColors
 
-/** A bounded group of apps: the same visual idea in the brand, introduction and review. */
+/** The app's logo: the frog from the app icon (ic_launcher_foreground.xml), drawn in code. */
 @Composable
 fun SpaceMark(modifier: Modifier = Modifier) {
-    Box(modifier.size(36.dp).clip(RoundedCornerShape(11.dp)).background(ParentColors.accent), contentAlignment = Alignment.Center) {
-        Icon(LineIcons.Grid, null, tint = Color.White, modifier = Modifier.size(22.dp))
+    val green = Color(0xFF6FBF73)
+    val cheek = Color(0xBFF4A6A0)
+    Canvas(modifier.size(36.dp).clip(RoundedCornerShape(11.dp)).background(Color(0xFFFBF4E4))) {
+        // Same numbers as the icon, whose visible part is the middle 72 of a 108 grid.
+        scale(size.width / 72f, pivot = Offset.Zero) {
+            translate(-18f, -20.5f) {
+                for (x in listOf(39.3f, 68.7f)) drawCircle(green, 11.025f, Offset(x, 42.05f))
+                drawOval(green, Offset(25.65f, 41.525f), Size(56.7f, 40.95f))
+                for (x in listOf(39.3f, 68.7f)) drawCircle(Color.White, 7.14f, Offset(x, 42.05f))
+                for (x in listOf(39.825f, 68.175f)) {
+                    drawCircle(ParentColors.ink, 3.78f, Offset(x, 42.575f))
+                    drawCircle(Color.White, 1.36f, Offset(x - 1.134f, 41.25f))
+                }
+                for (x in listOf(33.525f, 74.475f)) drawCircle(cheek, 3.57f, Offset(x, 64.1f))
+                drawArc(
+                    ParentColors.ink, 15f, 150f, false, Offset(36.15f, 47.3f), Size(35.7f, 23.1f),
+                    style = Stroke(2.31f, cap = StrokeCap.Round),
+                )
+            }
+        }
     }
 }
 
