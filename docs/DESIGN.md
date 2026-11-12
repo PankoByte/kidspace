@@ -1,4 +1,6 @@
-# Kid Space: parent experience redesign
+# Kid Space: design notes
+
+Why the parent-side screens look and behave the way they do. Written during the redesign that turned the first build (working name “Handover”) into Kid Space.
 
 The parent’s task is to lend their own phone for a short period, with a chosen set of apps and a clear way to take it back. The app should make that task visible before asking the parent to understand Android settings.
 
@@ -54,8 +56,6 @@ The organizing image is a bounded collection of app tiles. It appears in the bra
 
 Karla is used for parent headings, numbers and body text. The welcome headline is 38 sp; other screen titles are 30 sp. Body copy is 15 sp, with smaller supporting text reserved for secondary details. Content is left aligned; primary actions remain at the bottom while long content scrolls. The existing Fraunces type remains on the child home.
 
-The app icon now uses four app tiles instead of the Android project template icon. This helps parents recognize the same app when Android asks them to select a home app.
-
 ## Specific interaction decisions
 
 - Show the real selected app icons and labels on the parent home, not just a count. This is a compact preview of the choices, not a full interactive child session.
@@ -67,38 +67,13 @@ The app icon now uses four app tiles instead of the Android project template ico
 - Keep checkbox and radio-button selection semantics, labelled search, generous touch targets and scrolling content for larger text.
 - The parent home explicitly says kid mode is off. “App protection is ready” means configured, not that a session has already begun.
 
-## Naming options
-
-| Name | Strength | Tradeoff |
-| --- | --- | --- |
-| **Kid Space** | Most immediate explanation of a limited area for the child; used as the working name in this build | Descriptive and generic; availability and potential confusion need checking before release |
-| **KidTurn** | Connects naturally to lending a phone for a turn; more distinctive as a brand | Needs the tagline to communicate app restrictions |
-| **Kids Only** | Clearly suggests that only selected child-facing content belongs here | Can sound like a children’s content service |
-
-Recommended positioning: **“Your phone. Just their apps.”** This communicates the shared-phone use case more directly than a broad parental-control claim. No trademark, store-name or domain availability investigation was performed.
-
-## Product boundaries to carry into future work
+## Product boundaries
 
 Allowing an app gives access to its existing account and content. It does not create a separate Android user, remove purchases, hide photos inside that app, or filter its content. The app picker now explains this at the point where the parent chooses access.
 
 PIN recovery is not implemented. The PIN screen now tells parents this before they save a PIN. A deliberate recovery design is a useful next product decision.
 
 Normal launcher restoration can vary by device. The handover explanation acknowledges that some phones ask the parent to choose their normal home app again.
-
-These checks validate the redesigned experience on the supplied emulator; they are not an exhaustive assessment of resistance to every Android escape path or manufacturer variation.
-
-## Verification
-
-- Debug build and all 27 existing unit tests passed.
-- Android lint completed with no errors. Remaining warnings concern dependency/tool versions, existing API/resource details and existing implementation suggestions.
-- Walked through welcome, interactive Games example, app search and selection, session time, Accessibility consent, return-to-app status, PIN creation and confirmation, and parent home.
-- Checked the Android home-app explanation, cancellation recovery and successful session start.
-- Opened an allowed app, used Home to return to child mode, and verified that an unselected Android Settings screen was redirected to the child home.
-- Verified an incorrect PIN is rejected and the configured PIN returns to the normal Pixel launcher.
-- Checked the parent home and handover dialog at 360 × 640 dp with 1.3 font scale. Their content scrolls and primary actions remain available. Restored the emulator’s original display and font settings afterward.
-- Emulator setup uses PIN `1234`, Clock and YouTube as test selections, and a 30-minute session. Those selections are test fixtures, not recommendations for children.
-
-Screenshots from the walkthrough are in `.codex-qa/`. The redesigned APK is at `app/build/outputs/apk/debug/app-debug.apk`.
 
 ## Code map
 
