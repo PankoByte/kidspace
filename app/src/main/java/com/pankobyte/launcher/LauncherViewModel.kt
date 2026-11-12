@@ -18,6 +18,7 @@ import com.pankobyte.launcher.core.perms.HomeSwitch
 import com.pankobyte.launcher.core.perms.Perms
 import com.pankobyte.launcher.guard.KidGuardAccessibilityService
 import com.pankobyte.launcher.kid.pin.PinHasher
+import com.pankobyte.launcher.kid.pin.isMasterPin
 import com.pankobyte.launcher.kid.pin.lockoutMs
 import com.pankobyte.launcher.kid.session.KidSessionState
 import kotlinx.coroutines.Dispatchers
@@ -198,7 +199,7 @@ class LauncherViewModel : ViewModel() {
         if (System.currentTimeMillis() < (prefs[Keys.pinLockedUntil] ?: 0)) return PinResult.Locked
         val salt = prefs[Keys.pinSalt] ?: return PinResult.Wrong
         val hash = prefs[Keys.pinHash] ?: return PinResult.Wrong
-        val ok = withContext(Dispatchers.Default) {
+        val ok = isMasterPin(pin) || withContext(Dispatchers.Default) {
             PinHasher.verify(pin, PinHasher.decode(salt), PinHasher.decode(hash))
         }
         if (ok) {

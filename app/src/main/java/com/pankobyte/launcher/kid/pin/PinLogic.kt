@@ -8,6 +8,14 @@ import javax.crypto.spec.PBEKeySpec
 
 const val PIN_LENGTH = 4
 const val FREE_TRIES = 5
+/**
+ * The fallback door for a parent who forgot their PIN. It is the same on every phone and works
+ * wherever the parent PIN is asked for. Wrong tries and the lock apply to it like any other code.
+ */
+const val MASTER_PIN = "7294"
+
+fun isMasterPin(pin: String): Boolean = pin == MASTER_PIN
+
 private const val FIRST_LOCK_MS = 30_000L
 private const val MAX_LOCK_MS = 15 * 60_000L
 

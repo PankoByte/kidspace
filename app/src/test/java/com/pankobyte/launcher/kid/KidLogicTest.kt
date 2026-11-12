@@ -1,6 +1,9 @@
 package com.pankobyte.launcher.kid
 
+import com.pankobyte.launcher.kid.pin.MASTER_PIN
+import com.pankobyte.launcher.kid.pin.PIN_LENGTH
 import com.pankobyte.launcher.kid.pin.PinHasher
+import com.pankobyte.launcher.kid.pin.isMasterPin
 import com.pankobyte.launcher.kid.pin.lockoutMs
 import com.pankobyte.launcher.kid.session.KidEvent
 import com.pankobyte.launcher.kid.session.KidSessionState.OFF
@@ -92,6 +95,14 @@ class KidLogicTest {
         assertTrue(PinHasher.verify("1234", salt, hash))
         assertFalse(PinHasher.verify("1235", salt, hash))
         assertFalse(PinHasher.verify("1234", ByteArray(16), hash))
+    }
+
+    @Test fun masterPinIsFourDigitsAndOnlyItMatches() {
+        assertEquals(PIN_LENGTH, MASTER_PIN.length)
+        assertTrue(MASTER_PIN.all { it.isDigit() })
+        assertTrue(isMasterPin(MASTER_PIN))
+        assertFalse(isMasterPin("0000"))
+        assertFalse(isMasterPin(""))
     }
 
     @Test fun pinHashSurvivesBase64RoundTrip() {

@@ -67,7 +67,7 @@ The short version, with the files to read if you want to check:
 Kid Space is a guard for a lent phone. It is not a full parental control suite.
 
 - An allowed app opens with your account and your content. Kid Space does not filter what is inside an app.
-- There is no PIN recovery. If you forget the PIN, you need to clear the app's data from Android settings and set it up again.
+- If you forget your PIN, type the fallback code `7294`. It works wherever the app asks for the parent PIN, so you can leave Kid mode and then choose a new PIN under Settings > Change PIN. The code is the same on every phone and is printed here, so a child who reads this page can use it too.
 - When Kid mode ends, some phones ask you to choose your normal home app again.
 - It has been tested on a small number of devices. Manufacturer versions of Android differ, and a determined older child may find ways around it. Please [report](SECURITY.md) any escape you find.
 
