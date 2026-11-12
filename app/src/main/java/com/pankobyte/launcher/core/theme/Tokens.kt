@@ -80,6 +80,8 @@ object NightColors {
 
 object Dimens {
     val parentMargin = 24.dp
+    /** Widest a page of content gets. Wider screens centre it and leave the sides empty. */
+    val contentMaxWidth = 600.dp
     val parentButtonHeight = 56.dp
     val parentButtonRadius = 16.dp
     val parentCardRadius = 22.dp

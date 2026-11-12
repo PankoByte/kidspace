@@ -37,9 +37,10 @@
     <string name="guard_why_does_2">Sends your child back home from apps you didn\'t choose</string>
     <string name="guard_why_does_3">Closes the notification panel</string>
     <string name="guard_why_never">What it never does</string>
-    <string name="guard_why_never_1">Read the screen, messages or passwords</string>
-    <string name="guard_why_never_2">Send anything off this phone. Kid Space has no internet access.</string>
-    <string name="guard_why_never_3">Do anything while Kid mode is off</string>
+    <string name="guard_why_never_1">Never reads your screen, messages or passwords</string>
+    <string name="guard_why_never_2">Never sends anything to any server</string>
+    <string name="guard_why_never_3">Never connects to the internet. It has no internet permission.</string>
+    <string name="guard_why_never_4">Stays inactive when Kid mode is off</string>
     <string name="guard_why_ok">Got it</string>
 
     <!-- Setup step 3: choose apps -->
@@ -158,6 +159,7 @@
 
     <!-- Pop-up before Android's Do Not Disturb access list, with its looping demo. -->
     <string name="dnd_guide_title">Let Kid Space silence notifications</string>
+    <string name="dnd_guide_why">During Kid mode, Kid Space puts your phone on Do Not Disturb so your notifications stay quiet while your child plays. Calls still ring. When Kid mode ends, your phone goes back to how it was.</string>
     <string name="dnd_guide_open">Open settings</string>
     <string name="guide_dnd_screen">Do Not Disturb access</string>
     <string name="guide_dnd_toggle">Allow Do Not Disturb</string>

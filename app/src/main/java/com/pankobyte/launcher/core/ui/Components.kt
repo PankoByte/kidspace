@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.displayCutoutPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -85,7 +87,15 @@ fun ParentScreen(
             )
         }
         Column(
-            modifier = modifier.fillMaxSize().systemBarsPadding().imePadding().padding(horizontal = Dimens.parentMargin),
+            // On tablets and unfolded phones the page stays a readable column in the middle.
+            modifier = modifier
+                .align(Alignment.TopCenter)
+                .systemBarsPadding()
+                .displayCutoutPadding()
+                .imePadding()
+                .widthIn(max = Dimens.contentMaxWidth)
+                .fillMaxSize()
+                .padding(horizontal = Dimens.parentMargin),
             content = content,
         )
     }
@@ -161,13 +171,15 @@ fun ParentTitle(text: String, modifier: Modifier = Modifier, large: Boolean = fa
         fontFamily = DisplayFont,
         fontWeight = FontWeight.Bold,
         fontSize = if (large) 38.sp else 30.sp,
-        lineHeight = if (large) 40.sp else 34.sp,
+        lineHeight = if (large) 44.sp else 36.sp,
+        // Large type is tracked in a little, as on iOS large titles.
+        letterSpacing = if (large) (-0.6).sp else (-0.4).sp,
     )
 }
 
 @Composable
 fun ParentBody(text: String, modifier: Modifier = Modifier) {
-    Text(text = text, modifier = modifier, color = ParentColors.muted, fontSize = 15.sp, lineHeight = 21.sp)
+    Text(text = text, modifier = modifier, color = ParentColors.muted, fontSize = 16.sp, lineHeight = 24.sp)
 }
 
 /** A quiet sentence-case label above a group or inside a card. */

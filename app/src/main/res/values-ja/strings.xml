@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">選んでいないアプリからホームに戻す</string>
     <string name="guard_why_does_3">通知パネルを閉じる</string>
     <string name="guard_why_never">決してしないこと</string>
-    <string name="guard_why_never_1">画面、メッセージ、パスワードを読み取る</string>
-    <string name="guard_why_never_2">この端末の外にデータを送る。Kid Space はインターネットにアクセスできません。</string>
-    <string name="guard_why_never_3">キッズモードがオフのときに動作する</string>
+    <string name="guard_why_never_1">画面、メッセージ、パスワードを読み取ることはありません</string>
+    <string name="guard_why_never_2">サーバーにデータを送ることはありません</string>
+    <string name="guard_why_never_3">インターネットに接続することはありません。インターネットの権限がありません。</string>
+    <string name="guard_why_never_4">キッズモードがオフのときは動作しません</string>
     <string name="guard_why_ok">OK</string>
     <string name="apps_title">どのアプリを開けるようにしますか？</string>
     <string name="apps_search">アプリを検索</string>
@@ -121,6 +122,7 @@
     <string name="guide_step_allow">「許可」をタップ</string>
     <string name="guide_default">デフォルトに設定</string>
     <string name="dnd_guide_title">Kid Space に通知のミュートを許可</string>
+    <string name="dnd_guide_why">キッズモード中、Kid Space はサイレント モードをオンにして、お子さまが遊んでいる間は通知が鳴らないようにします。電話の着信は鳴ります。キッズモードを終了すると、元の設定に戻ります。</string>
     <string name="dnd_guide_open">設定を開く</string>
     <string name="guide_dnd_screen">サイレント モードへのアクセス</string>
     <string name="guide_dnd_toggle">サイレント モードを許可</string>

@@ -25,7 +25,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Path
@@ -46,6 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pankobyte.launcher.R
+import com.pankobyte.launcher.core.theme.KidColors
 import com.pankobyte.launcher.core.theme.LineIcons
 import com.pankobyte.launcher.core.theme.ParentColors
 import kotlin.math.PI
@@ -70,8 +76,8 @@ private fun smooth(value: Float): Float = value.coerceIn(0f, 1f).let { it * it *
  * right with the child's apps. The two are never on screen as one, which is the whole promise.
  */
 @Composable
-fun WelcomeIllustration() {
-    val progress = illustrationProgress(loopMillis = 5500)
+fun WelcomeIllustration(modifier: Modifier = Modifier) {
+    val progress = illustrationProgress(loopMillis = 6000)
     val name = stringResource(R.string.app_name)
     val description = stringResource(R.string.welcome_animation_description)
     val parentApps = listOf(LineIcons.Camera, LineIcons.Phone, LineIcons.Clock, LineIcons.Music, LineIcons.Sliders,
@@ -79,71 +85,199 @@ fun WelcomeIllustration() {
     val kidApps = listOf(LineIcons.Gamepad, LineIcons.Brush, LineIcons.Book, LineIcons.Music).map { rememberVectorPainter(it) }
     val kidTints = listOf(Color(0xFFDCD5F5), Color(0xFFFFDFCA), Color(0xFFD5E2FF), Color(0xFFFCE7B2))
     val lock = rememberVectorPainter(LineIcons.Lock)
-    Canvas(Modifier.fillMaxWidth().aspectRatio(1.03f).clearAndSetSemantics { contentDescription = description }) {
+    val glass = remember {
+        Path().apply { addRoundRect(RoundRect(Rect(SCREEN_X, SCREEN_Y, SCREEN_X + SCREEN_W, SCREEN_Y + SCREEN_H), CornerRadius(27f))) }
+    }
+    Canvas(modifier.clearAndSetSemantics { contentDescription = description }) {
         val t = progress.value
-        // The parent's side: boxed, locked, sent left. It fades back in place to restart the loop.
-        val leaving = t < 0.6f
-        val boxed = if (leaving) seg(t, 0.10f, 0.20f) else 0f
-        val locked = if (leaving) seg(t, 0.22f, 0.30f) else 0f
-        val parentShift = if (leaving) -190f * seg(t, 0.36f, 0.52f) else 0f
-        val parentAlpha = if (leaving) 1f else seg(t, 0.94f, 1f)
-        // The child's side: arrives from the right as the other one goes.
-        val kidShift = 190f * (1 - seg(t, 0.42f, 0.58f))
-        val kidAlpha = 1 - seg(t, 0.90f, 0.96f)
-        scale(size.width / 360f, pivot = Offset.Zero) {
-            drawCircle(ParentColors.blueSoft, 130f, Offset(180f, 172f))
-            drawOval(ParentColors.border.copy(alpha = 0.55f), Offset(95f, 329f), Size(170f, 12f))
-            box(ParentColors.ink, 91f, 6f, 178f, 321f, 30f)
-            box(Color.White, 97f, 12f, 166f, 309f, 25f)
-            box(ParentColors.ink, 157f, 21f, 46f, 5f, 3f)
-            box(ParentColors.border, 153f, 307f, 54f, 4f, 2f)
-            clipRect(97f, 30f, 263f, 302f) {
-                translate(left = parentShift) {
-                    box(ParentColors.bg, 107f, 56f, 146f, 190f, 18f, boxed * parentAlpha)
-                    drawRoundRect(ParentColors.ink, Offset(107f, 56f), Size(146f, 190f), CornerRadius(18f),
-                        style = Stroke(2f), alpha = boxed * parentAlpha)
-                    for (index in parentApps.indices) {
-                        val x = 118f + (index % 3) * 44f
-                        // The grid tightens a little as the box closes around it.
-                        val y = 76f + (index / 3) * (50f - 6f * boxed)
-                        box(ParentColors.sage, x, y, 36f, 36f, 11f, parentAlpha)
-                        glyph(parentApps[index], x + 8f, y + 8f, 20f, ParentColors.muted, parentAlpha)
-                    }
-                    if (locked > 0f) {
-                        val pop = locked * (1 + 0.2f * sin(locked * PI).toFloat())
-                        drawCircle(ParentColors.ink, 15f * pop, Offset(180f, 222f), alpha = locked)
-                        glyph(lock, 172f, 214f, 16f, Color.White, locked)
-                    }
+        // The parent's home screen shrinks into a card of its own, a lock closes on it, and the
+        // card leaves to the left. At the end of the loop it is simply back, full size.
+        val leaving = t < 0.9f
+        val boxed = if (leaving) seg(t, 0.07f, 0.18f) else 0f
+        val locked = if (leaving) seg(t, 0.19f, 0.27f) else 0f
+        val parentOut = if (leaving) seg(t, 0.30f, 0.44f) else 0f
+        // The child's space arrives as a second, separate card, then opens to fill the screen.
+        // The two cards are never joined, which is the whole promise.
+        val kidIn = seg(t, 0.38f, 0.52f)
+        val opened = seg(t, 0.54f, 0.64f)
+        val kidAlpha = 1 - seg(t, 0.93f, 1f)
+        // The phone floats: one slow rise and fall per loop, with the ground shadow answering it.
+        val lift = sin(t * 2 * PI).toFloat()
+        // Drawn in its own units and fitted to whatever room the screen has left over.
+        val unit = minOf(size.width / STAGE_W, size.height / STAGE_H)
+        translate(size.width / 2 - 180f * unit, (size.height - STAGE_H * unit) / 2) {
+        scale(unit, pivot = Offset.Zero) {
+            drawCircle(ParentColors.blueSoft, 138f, Offset(180f, 207f))
+            translate(180f, 421f) {
+                scale(1f - 0.06f * lift, 0.09f, pivot = Offset.Zero) {
+                    drawCircle(
+                        Brush.radialGradient(
+                            0f to ParentColors.ink.copy(alpha = 0.34f - 0.06f * lift),
+                            0.55f to ParentColors.ink.copy(alpha = 0.12f),
+                            1f to Color.Transparent,
+                            center = Offset.Zero, radius = 106f,
+                        ),
+                        106f, Offset.Zero,
+                    )
                 }
-                if (kidAlpha > 0f && kidShift < 190f) {
-                    translate(left = kidShift) {
-                        box(ParentColors.preview, 107f, 56f, 146f, 190f, 18f, kidAlpha)
-                        drawRoundRect(ParentColors.accent, Offset(107f, 56f), Size(146f, 190f), CornerRadius(18f),
-                            style = Stroke(2f), alpha = kidAlpha)
-                        label(name, 180f, 86f, 14f, ParentColors.ink, bold = true, alpha = kidAlpha, center = true, maxWidth = 126f)
+            }
+            translate(top = -2.5f * lift) {
+                phone(SCREEN_X, SCREEN_Y, SCREEN_W, SCREEN_H, 27f, Backdrop)
+                clipPath(glass) {
+                    if (parentOut < 1f) card(glass, -CARD_TRAVEL * parentOut, 1f - CARD_SHRINK * boxed) {
+                        drawRect(ParentWallpaper, Offset(SCREEN_X, SCREEN_Y), Size(SCREEN_W, SCREEN_H))
+                        // A widget, a grid of apps and a dock, as on any phone.
+                        tile(112f, 46f, 136f, 54f, 16f)
+                        drawCircle(ParentColors.blueSoft, 15f, Offset(134f, 73f))
+                        box(ParentColors.sage, 158f, 62f, 74f, 8f, 4f)
+                        box(ParentColors.sageSoft, 158f, 77f, 50f, 8f, 4f)
+                        for (index in parentApps.indices) {
+                            val x = 112f + (index % 3) * 50f
+                            val y = 120f + (index / 3) * 54f
+                            tile(x, y, 36f, 36f, 11f)
+                            glyph(parentApps[index], x + 9f, y + 9f, 18f, ParentColors.muted, unit)
+                        }
+                        box(Color.White, 106f, 334f, 148f, 50f, 19f, 0.7f)
+                        for (index in 0..2) {
+                            val x = 116f + index * 46f
+                            box(ParentColors.sage, x, 341f, 36f, 36f, 11f)
+                            glyph(parentApps[index + 1], x + 9f, 350f, 18f, ParentColors.ink, unit)
+                        }
+                        drawRect(ParentColors.ink, Offset(SCREEN_X, SCREEN_Y), Size(SCREEN_W, SCREEN_H), alpha = 0.32f * locked)
+                        if (locked > 0f) {
+                            // In the gap between the grid and the dock, so it covers no app.
+                            val pop = locked * (1 + 0.2f * sin(locked * PI).toFloat())
+                            drawCircle(Color.White, 20f * pop, Offset(180f, 300f), alpha = locked)
+                            glyph(lock, 170f, 290f, 20f, ParentColors.ink, unit, locked)
+                        }
+                    }
+                    if (kidIn > 0f && kidAlpha > 0f) card(glass, CARD_TRAVEL * (1 - kidIn), 1f - CARD_SHRINK * (1 - opened)) {
+                        drawRect(KidWallpaper, Offset(SCREEN_X, SCREEN_Y), Size(SCREEN_W, SCREEN_H), alpha = kidAlpha)
+                        drawCircle(KidColors.sun, 13f, Offset(238f, 58f), alpha = kidAlpha)
+                        drawOval(KidColors.hillBack, Offset(60f, 352f), Size(200f, 120f), alpha = kidAlpha)
+                        drawOval(KidColors.hillFront, Offset(150f, 366f), Size(220f, 120f), alpha = kidAlpha)
+                        drawLogo(163f, 48f, 34f, kidAlpha)
+                        label(name, 180f, 103f, 16f, KidColors.ink, bold = true, alpha = kidAlpha, center = true, maxWidth = 140f)
                         for (index in kidApps.indices) {
-                            val shown = seg(t, 0.56f + 0.04f * index, 0.64f + 0.04f * index) * kidAlpha
-                            val x = 121f + (index % 2) * 62f
-                            val y = 104f + (index / 2) * 64f
-                            box(Color.White, x, y, 56f, 56f, 16f, shown)
-                            drawCircle(kidTints[index], 19f * shown, Offset(x + 28f, y + 28f), alpha = shown)
-                            glyph(kidApps[index], x + 17f, y + 17f, 22f, ParentColors.ink, shown)
+                            val shown = seg(t, 0.58f + 0.02f * index, 0.64f + 0.02f * index) * kidAlpha
+                            val x = 110f + (index % 2) * 76f
+                            val y = 124f + (index / 2) * 76f
+                            tile(x, y, 64f, 64f, 20f, shown)
+                            drawCircle(kidTints[index], 22f * shown, Offset(x + 32f, y + 32f), alpha = shown)
+                            glyph(kidApps[index], x + 20f, y + 20f, 24f, ParentColors.ink, unit, shown)
                         }
                     }
                 }
+                // Drawn over the sliding screens, as the real ones sit over whatever is showing.
+                statusBar(SCREEN_X, SCREEN_Y, SCREEN_W)
+                island(180f, 18f)
+                box(ParentColors.ink, 154f, 392f, 52f, 4f, 2f, 0.85f)
             }
+        }
         }
     }
 }
 
-private fun DrawScope.glyph(painter: Painter, x: Float, y: Float, side: Float, tint: Color, alpha: Float = 1f) {
-    // Rasterize the vector at the final pixel size, avoiding a blurry upscaled cache.
-    val factor = size.width / 360f
-    translate(x, y) {
-        scale(1f / factor, pivot = Offset.Zero) {
-            with(painter) { draw(Size(side * factor, side * factor), alpha = alpha, colorFilter = ColorFilter.tint(tint)) }
+// The welcome phone, in drawing units. Its screen is 9 by 21, as tall phones are.
+private const val SCREEN_X = 96f
+private const val SCREEN_Y = 11f
+private const val SCREEN_W = 168f
+private const val SCREEN_H = 392f
+private const val STAGE_W = 290f
+private const val STAGE_H = 434f
+private val ParentWallpaper = Brush.verticalGradient(listOf(Color(0xFFEEF2FB), Color(0xFFDDE6F8)), startY = SCREEN_Y, endY = SCREEN_Y + SCREEN_H)
+private val KidWallpaper = Brush.verticalGradient(listOf(KidColors.sky, Color(0xFFEAF4F1)), startY = SCREEN_Y, endY = SCREEN_Y + SCREEN_H)
+
+private val Backdrop = Brush.verticalGradient(listOf(Color(0xFFD9E1F2), Color(0xFFC6D2EA)), startY = SCREEN_Y, endY = SCREEN_Y + SCREEN_H)
+
+/** How much smaller a home screen is once it has become a card, and how far a card slides to leave. */
+private const val CARD_SHRINK = 0.27f
+private const val CARD_TRAVEL = 165f
+
+/**
+ * A whole home screen as a card: [amount] of full size about the middle of the phone's screen and
+ * moved sideways by [shift]. Below full size it gets rounded corners from [glass] and a shadow.
+ */
+private inline fun DrawScope.card(glass: Path, shift: Float, amount: Float, content: DrawScope.() -> Unit) {
+    translate(left = shift) {
+        scale(amount, pivot = Offset(180f, SCREEN_Y + SCREEN_H / 2)) {
+            val lifted = ((1f - amount) / CARD_SHRINK).coerceIn(0f, 1f)
+            for (step in 1..5) {
+                val grow = step * 2.2f
+                box(ParentColors.ink, SCREEN_X - grow, SCREEN_Y - grow + 7f, SCREEN_W + 2 * grow, SCREEN_H + 2 * grow, 27f + grow, 0.04f * lifted)
+            }
+            clipPath(glass) { content() }
         }
     }
+}
+
+/** A white tile sitting just above the wallpaper: no outline, only a faint shadow under it. */
+private fun DrawScope.tile(x: Float, y: Float, w: Float, h: Float, r: Float, alpha: Float = 1f) {
+    box(ParentColors.ink, x - 0.5f, y + 2.5f, w + 1f, h, r, 0.05f * alpha)
+    box(ParentColors.ink, x, y + 1f, w, h, r, 0.05f * alpha)
+    box(Color.White, x, y, w, h, r, alpha)
+}
+
+private fun DrawScope.glyph(painter: Painter, x: Float, y: Float, side: Float, tint: Color, unit: Float, alpha: Float = 1f) {
+    // Rasterize the vector at the final pixel size, avoiding a blurry upscaled cache.
+    translate(x, y) {
+        scale(1f / unit, pivot = Offset.Zero) {
+            with(painter) { draw(Size(side * unit, side * unit), alpha = alpha, colorFilter = ColorFilter.tint(tint)) }
+        }
+    }
+}
+
+private val FrameLight = Color(0xFF6F82AB)
+private val FrameMid = Color(0xFF2A3D63)
+private val FrameDark = Color(0xFF111F3A)
+private val Bezel = Color(0xFF0A1426)
+
+/**
+ * A phone around a screen of [w] by [h] at [x], [y]: soft drop shadow, side buttons, a metal
+ * frame that catches light at its top left corner, a dark bezel, then the screen itself.
+ */
+private fun DrawScope.phone(x: Float, y: Float, w: Float, h: Float, r: Float, screen: Brush = SolidColor(Color.White)) {
+    val bezel = 4.6f
+    val edge = bezel + 2.4f
+    // The shadow is a stack of faint, growing copies of the body, which reads as one soft blur.
+    for (step in 1..8) {
+        val grow = step * 1.5f
+        box(ParentColors.ink, x - edge - grow, y - edge - grow + 8f, w + 2 * (edge + grow), h + 2 * (edge + grow), r + edge + grow, 0.02f)
+    }
+    box(FrameDark, x + w + edge - 1.2f, y + h * 0.27f, 2.8f, h * 0.11f, 1.4f)
+    box(FrameDark, x - edge - 1.6f, y + h * 0.21f, 2.8f, h * 0.06f, 1.4f)
+    box(FrameDark, x - edge - 1.6f, y + h * 0.29f, 2.8f, h * 0.06f, 1.4f)
+    val outer = Offset(x - edge, y - edge)
+    val outerSize = Size(w + 2 * edge, h + 2 * edge)
+    drawRoundRect(
+        Brush.linearGradient(
+            0f to FrameLight, 0.18f to FrameMid, 0.62f to FrameDark, 1f to FrameMid,
+            start = outer, end = Offset(outer.x + outerSize.width, outer.y + outerSize.height),
+        ),
+        outer, outerSize, CornerRadius(r + edge),
+    )
+    box(Bezel, x - bezel, y - bezel, w + 2 * bezel, h + 2 * bezel, r + bezel)
+    drawRoundRect(screen, Offset(x, y), Size(w, h), CornerRadius(r))
+}
+
+/** The camera cut-out at the top of the screen, centred on [cx]. */
+private fun DrawScope.island(cx: Float, y: Float) {
+    box(Bezel, cx - 19f, y, 38f, 11f, 5.5f)
+    drawCircle(Color(0xFF24365A), 2.4f, Offset(cx + 11f, y + 5.5f))
+    drawCircle(Color(0xFF5E78B0), 0.8f, Offset(cx + 10.3f, y + 4.8f))
+}
+
+/** Clock, signal and battery along the top of a screen that starts at [x], [y] and is [w] wide. */
+private fun DrawScope.statusBar(x: Float, y: Float, w: Float) {
+    label("9:41", x + 18f, y + 16f, 9f, ParentColors.ink, bold = true)
+    val right = x + w - 18f
+    for (bar in 0..3) {
+        val height = 2.5f + bar * 1.5f
+        box(ParentColors.ink, right - 36f + bar * 3.4f, y + 16f - height, 2.2f, height, 0.8f)
+    }
+    drawRoundRect(ParentColors.ink, Offset(right - 17f, y + 8.5f), Size(15f, 7.5f), CornerRadius(2.4f), alpha = 0.45f, style = Stroke(0.9f))
+    box(ParentColors.ink, right - 15.6f, y + 9.9f, 9.5f, 4.7f, 1.3f)
+    box(ParentColors.ink, right - 1.2f, y + 10.8f, 1.2f, 3f, 0.6f, 0.45f)
 }
 
 private fun seg(t: Float, from: Float, to: Float): Float = smooth((t - from) / (to - from))
@@ -237,9 +371,8 @@ private fun SettingsDemo(words: DemoWords, progress: State<Float>, still: Boolea
         val done = seg(t, 0.82f, 0.88f)
         scale(size.width / 360f, pivot = Offset.Zero) {
             // The phone runs off the bottom of the stage: a crop of a screen, not a card.
-            box(ParentColors.ink, 65f, 22f, 230f, 300f, 30f)
-            box(Color.White, 71f, 28f, 218f, 300f, 24f)
-            box(ParentColors.ink, 157f, 36f, 46f, 5f, 3f)
+            phone(71f, 28f, 218f, 300f, 24f)
+            island(180f, 34f)
             clipRect(71f, 28f, 289f, 250f) {
                 // Screen one: a list in Android settings, with our row in it.
                 val a = 1 - page
@@ -387,8 +520,7 @@ fun HomeChoiceGuide() {
             val ready = seg(t, 0.28f, 0.33f) * (1 - seg(t, 0.96f, 1f))
             scale(size.width / 360f, pivot = Offset.Zero) {
                 // The lower half of a phone, with Android's prompt sliding up from its edge.
-                box(ParentColors.ink, 65f, -90f, 230f, 282f, 30f)
-                box(Color(0xFFC3CCDD), 71f, -84f, 218f, 270f, 24f)
+                phone(71f, -84f, 218f, 270f, 24f, SolidColor(Color(0xFFC3CCDD)))
                 box(Color.White, 71f, 34f, 218f, 152f, 20f)
                 box(ParentColors.sage, 87f, 52f, 112f, 9f, 4.5f)
                 mark(87f, 76f, 24f)

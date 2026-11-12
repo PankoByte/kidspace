@@ -253,8 +253,9 @@ private fun SectionHeader(title: String, note: String?) {
 @Composable
 private fun AppRow(entry: AppEntry, checked: Boolean, onToggle: () -> Unit) {
     Row(
-        Modifier.fillMaxWidth().heightIn(min = 64.dp)
-            .clip(RoundedCornerShape(12.dp))
+        // The gap is outside the tinted shape, so two chosen rows next to each other stay two pills.
+        Modifier.fillMaxWidth().padding(vertical = 3.dp).heightIn(min = 60.dp)
+            .clip(RoundedCornerShape(14.dp))
             .background(if (checked) ParentColors.blueSoft else androidx.compose.ui.graphics.Color.Transparent)
             .toggleable(checked, role = Role.Checkbox, onValueChange = { onToggle() })
             .padding(horizontal = 10.dp, vertical = 8.dp),

@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">आपके न चुने हुए ऐप से बच्चे को वापस होम पर भेजता है</string>
     <string name="guard_why_does_3">सूचना पैनल बंद करता है</string>
     <string name="guard_why_never">यह कभी नहीं करता</string>
-    <string name="guard_why_never_1">स्क्रीन, मैसेज या पासवर्ड पढ़ना</string>
-    <string name="guard_why_never_2">इस फ़ोन से कुछ भी बाहर भेजना. Kid Space के पास इंटरनेट की अनुमति नहीं है.</string>
-    <string name="guard_why_never_3">Kid mode बंद होने पर कुछ भी करना</string>
+    <string name="guard_why_never_1">आपकी स्क्रीन, मैसेज या पासवर्ड कभी नहीं पढ़ता</string>
+    <string name="guard_why_never_2">किसी भी सर्वर को कभी कुछ नहीं भेजता</string>
+    <string name="guard_why_never_3">इंटरनेट से कभी नहीं जुड़ता. इसके पास इंटरनेट की अनुमति ही नहीं है.</string>
+    <string name="guard_why_never_4">Kid mode बंद होने पर निष्क्रिय रहता है</string>
     <string name="guard_why_ok">ठीक है</string>
     <string name="apps_title">वे क्या खोल सकते हैं?</string>
     <string name="apps_search">ऐप खोजें</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">अनुमति दें पर टैप करें</string>
     <string name="guide_default">डिफ़ॉल्ट के तौर पर सेट करें</string>
     <string name="dnd_guide_title">Kid Space को सूचनाएं म्यूट करने दें</string>
+    <string name="dnd_guide_why">Kid mode के दौरान Kid Space आपके फ़ोन को Do Not Disturb पर रखता है, ताकि बच्चे के खेलते समय आपकी सूचनाएं शांत रहें. कॉल फिर भी बजती हैं. Kid mode खत्म होते ही फ़ोन पहले जैसा हो जाता है.</string>
     <string name="dnd_guide_open">सेटिंग खोलें</string>
     <string name="guide_dnd_screen">\'परेशान न करें\' का ऐक्सेस</string>
     <string name="guide_dnd_toggle">\'परेशान न करें\' की अनुमति दें</string>

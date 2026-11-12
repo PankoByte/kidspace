@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -212,10 +213,11 @@ fun KidPinScreen(vm: LauncherViewModel, onBack: () -> Unit, onSuccess: () -> Uni
     val check = rememberPinCheck(vm, onSuccess)
     Box(Modifier.fillMaxSize().background(NightColors.bg)) {
         Column(
-            Modifier.fillMaxSize().systemBarsPadding().padding(horizontal = Dimens.kidMargin),
+            Modifier.align(Alignment.TopCenter).systemBarsPadding().widthIn(max = Dimens.contentMaxWidth).fillMaxSize().padding(horizontal = Dimens.kidMargin),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(Modifier.height(36.dp))
+            // Gives way first on a short screen, so the number pad and the way out always fit.
+            Spacer(Modifier.weight(0.6f, fill = false).height(36.dp))
             Box(Modifier.size(52.dp).clip(CircleShape).background(NightColors.raised), contentAlignment = Alignment.Center) {
                 Icon(LineIcons.Lock, null, tint = NightColors.text, modifier = Modifier.size(24.dp))
             }

@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Devuelve a tu hijo al inicio desde apps que no elegiste</string>
     <string name="guard_why_does_3">Cierra el panel de notificaciones</string>
     <string name="guard_why_never">Qué no hace nunca</string>
-    <string name="guard_why_never_1">Leer la pantalla, mensajes o contraseñas</string>
-    <string name="guard_why_never_2">Enviar nada fuera de este teléfono. Kid Space no tiene acceso a internet.</string>
-    <string name="guard_why_never_3">Hacer nada mientras el modo niño está desactivado</string>
+    <string name="guard_why_never_1">Nunca lee tu pantalla, tus mensajes ni tus contraseñas</string>
+    <string name="guard_why_never_2">Nunca envía nada a ningún servidor</string>
+    <string name="guard_why_never_3">Nunca se conecta a internet. No tiene permiso de internet.</string>
+    <string name="guard_why_never_4">Permanece inactivo cuando el modo niño está desactivado</string>
     <string name="guard_why_ok">Entendido</string>
     <string name="apps_title">¿Qué puede abrir?</string>
     <string name="apps_search">Buscar apps</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">Toca Permitir</string>
     <string name="guide_default">Establecer como predeterminada</string>
     <string name="dnd_guide_title">Permite que Kid Space silencie las notificaciones</string>
+    <string name="dnd_guide_why">En el modo niño, Kid Space pone tu teléfono en No molestar para que tus notificaciones no suenen mientras tu hijo juega. Las llamadas siguen sonando. Al salir del modo niño, tu teléfono vuelve a estar como antes.</string>
     <string name="dnd_guide_open">Abrir ajustes</string>
     <string name="guide_dnd_screen">Acceso a No molestar</string>
     <string name="guide_dnd_toggle">Permitir No molestar</string>

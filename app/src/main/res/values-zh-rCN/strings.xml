@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">孩子打开未选的应用时，返回主屏幕</string>
     <string name="guard_why_does_3">关闭通知面板</string>
     <string name="guard_why_never">绝不会做什么</string>
-    <string name="guard_why_never_1">读取屏幕内容、消息或密码</string>
-    <string name="guard_why_never_2">把任何数据发出这台手机。Kid Space 没有联网权限。</string>
-    <string name="guard_why_never_3">在儿童模式关闭时做任何事</string>
+    <string name="guard_why_never_1">绝不读取屏幕内容、消息或密码</string>
+    <string name="guard_why_never_2">绝不向任何服务器发送任何数据</string>
+    <string name="guard_why_never_3">绝不联网。它没有联网权限。</string>
+    <string name="guard_why_never_4">儿童模式关闭时不会运行</string>
     <string name="guard_why_ok">知道了</string>
     <string name="apps_title">孩子可以打开哪些应用？</string>
     <string name="apps_search">搜索应用</string>
@@ -121,6 +122,7 @@
     <string name="guide_step_allow">点按“允许”</string>
     <string name="guide_default">设为默认应用</string>
     <string name="dnd_guide_title">允许 Kid Space 将通知静音</string>
+    <string name="dnd_guide_why">在儿童模式下，Kid Space 会开启勿扰模式，孩子玩耍时你的通知会保持安静。来电仍会响铃。儿童模式结束后，手机会恢复到之前的设置。</string>
     <string name="dnd_guide_open">打开设置</string>
     <string name="guide_dnd_screen">“勿扰”权限</string>
     <string name="guide_dnd_toggle">允许“勿扰”</string>

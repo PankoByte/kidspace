@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Seçmediğiniz uygulamalardan çocuğunuzu ana ekrana döndürür</string>
     <string name="guard_why_does_3">Bildirim panelini kapatır</string>
     <string name="guard_why_never">Asla yapmadıkları</string>
-    <string name="guard_why_never_1">Ekranı, mesajları veya şifreleri okumak</string>
-    <string name="guard_why_never_2">Bu telefondan dışarı bir şey göndermek. Kid Space\'in internet erişimi yok.</string>
-    <string name="guard_why_never_3">Çocuk modu kapalıyken bir şey yapmak</string>
+    <string name="guard_why_never_1">Ekranınızı, mesajlarınızı veya şifrelerinizi asla okumaz</string>
+    <string name="guard_why_never_2">Hiçbir sunucuya asla bir şey göndermez</string>
+    <string name="guard_why_never_3">İnternete asla bağlanmaz. İnternet izni yoktur.</string>
+    <string name="guard_why_never_4">Çocuk modu kapalıyken etkin değildir</string>
     <string name="guard_why_ok">Anladım</string>
     <string name="apps_title">Neleri açabilsinler?</string>
     <string name="apps_search">Uygulama ara</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">İzin ver\'e dokunun</string>
     <string name="guide_default">Varsayılan olarak ayarla</string>
     <string name="dnd_guide_title">Kid Space\'in bildirimleri sessize almasına izin verin</string>
+    <string name="dnd_guide_why">Çocuk modunda Kid Space telefonunuzu Rahatsız Etmeyin moduna alır; böylece çocuğunuz oynarken bildirimleriniz sessiz kalır. Aramalar yine çalar. Çocuk modu bitince telefonunuz eski haline döner.</string>
     <string name="dnd_guide_open">Ayarları aç</string>
     <string name="guide_dnd_screen">Rahatsız Etmeyin erişimi</string>
     <string name="guide_dnd_toggle">Rahatsız Etmeyin\'e izin ver</string>

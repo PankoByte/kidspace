@@ -205,7 +205,14 @@ fun HomeScreen(vm: LauncherViewModel) {
             title = {
                 Text(stringResource(R.string.dnd_guide_title), color = ParentColors.ink, fontSize = 21.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
             },
-            text = { DndGuide() },
+            text = {
+                // Why first, then how. It scrolls, so the buttons stay reachable on a short screen.
+                Column(Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())) {
+                    Text(stringResource(R.string.dnd_guide_why), color = ParentColors.ink, fontSize = 15.sp, lineHeight = 21.sp)
+                    Spacer(Modifier.height(16.dp))
+                    DndGuide()
+                }
+            },
             confirmButton = {
                 PrimaryButton(stringResource(R.string.dnd_guide_open), { explainDnd = false; openSettings(Perms.dndIntent()) })
             },
@@ -221,7 +228,7 @@ fun HomeScreen(vm: LauncherViewModel) {
             title = {
                 Text(stringResource(R.string.handoff_title), color = ParentColors.ink, fontSize = 21.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
             },
-            text = { HomeChoiceGuide() },
+            text = { Column(Modifier.verticalScroll(rememberScrollState())) { HomeChoiceGuide() } },
             confirmButton = {
                 PrimaryButton(stringResource(R.string.handoff_confirm), { explainHome = false; start() })
             },

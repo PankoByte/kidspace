@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Возвращает ребёнка на главный экран из невыбранных приложений</string>
     <string name="guard_why_does_3">Закрывает панель уведомлений</string>
     <string name="guard_why_never">Чего никогда не делает</string>
-    <string name="guard_why_never_1">Не читает экран, сообщения или пароли</string>
-    <string name="guard_why_never_2">Ничего не отправляет с телефона. У Kid Space нет доступа к интернету.</string>
-    <string name="guard_why_never_3">Ничего не делает, когда детский режим выключен</string>
+    <string name="guard_why_never_1">Никогда не читает экран, сообщения и пароли</string>
+    <string name="guard_why_never_2">Никогда ничего не отправляет на серверы</string>
+    <string name="guard_why_never_3">Никогда не подключается к интернету. У него нет разрешения на доступ в интернет.</string>
+    <string name="guard_why_never_4">Не работает, когда детский режим выключен</string>
     <string name="guard_why_ok">Понятно</string>
     <string name="apps_title">Что им можно открывать?</string>
     <string name="apps_search">Поиск приложений</string>
@@ -130,6 +131,7 @@
     <string name="guide_step_allow">Нажмите «Разрешить»</string>
     <string name="guide_default">Использовать по умолчанию</string>
     <string name="dnd_guide_title">Разрешите Kid Space отключать уведомления</string>
+    <string name="dnd_guide_why">В детском режиме Kid Space включает «Не беспокоить», чтобы ваши уведомления не звучали, пока ребёнок играет. Звонки по-прежнему проходят. Когда детский режим закончится, телефон вернётся к прежним настройкам.</string>
     <string name="dnd_guide_open">Открыть настройки</string>
     <string name="guide_dnd_screen">Доступ к «Не беспокоить»</string>
     <string name="guide_dnd_toggle">Разрешить «Не беспокоить»</string>

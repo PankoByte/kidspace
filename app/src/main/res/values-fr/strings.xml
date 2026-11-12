@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Ramène votre enfant à l\'accueil depuis les apps non choisies</string>
     <string name="guard_why_does_3">Ferme le volet des notifications</string>
     <string name="guard_why_never">Ce qu\'il ne fait jamais</string>
-    <string name="guard_why_never_1">Lire l\'écran, les messages ou les mots de passe</string>
-    <string name="guard_why_never_2">Envoyer quoi que ce soit hors de ce téléphone. Kid Space n\'a pas accès à Internet.</string>
-    <string name="guard_why_never_3">Agir quand le mode enfant est désactivé</string>
+    <string name="guard_why_never_1">Ne lit jamais votre écran, vos messages ni vos mots de passe</string>
+    <string name="guard_why_never_2">N\'envoie jamais rien à aucun serveur</string>
+    <string name="guard_why_never_3">Ne se connecte jamais à Internet. Il n\'a pas l\'autorisation Internet.</string>
+    <string name="guard_why_never_4">Reste inactif quand le mode enfant est désactivé</string>
     <string name="guard_why_ok">Compris</string>
     <string name="apps_title">Que peuvent-ils ouvrir ?</string>
     <string name="apps_search">Rechercher des applis</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">Appuyez sur Autoriser</string>
     <string name="guide_default">Définir par défaut</string>
     <string name="dnd_guide_title">Autorisez Kid Space à couper les notifications</string>
+    <string name="dnd_guide_why">En mode enfant, Kid Space met votre téléphone en Ne pas déranger pour que vos notifications restent silencieuses pendant que votre enfant joue. Les appels sonnent toujours. À la fin du mode enfant, votre téléphone redevient comme avant.</string>
     <string name="dnd_guide_open">Ouvrir les paramètres</string>
     <string name="guide_dnd_screen">Accès à Ne pas déranger</string>
     <string name="guide_dnd_toggle">Autoriser Ne pas déranger</string>

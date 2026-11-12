@@ -105,17 +105,18 @@ fun OnboardingFlow(vm: LauncherViewModel, step: Int, onFinish: () -> Unit) {
 @Composable
 private fun WelcomeScreen(onNext: () -> Unit) {
     ParentScreen {
-        Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
-            Row(Modifier.padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+        // No scrolling here: the picture takes whatever height the words leave it.
+        Column(Modifier.weight(1f)) {
+            Row(Modifier.padding(top = 20.dp), verticalAlignment = Alignment.CenterVertically) {
                 SpaceMark()
-                Spacer(Modifier.width(10.dp))
-                Text(stringResource(R.string.app_name), color = ParentColors.ink, fontWeight = FontWeight.Bold, fontSize = 21.sp)
+                Spacer(Modifier.width(12.dp))
+                Text(stringResource(R.string.app_name), color = ParentColors.ink, fontWeight = FontWeight.Bold, fontSize = 20.sp, letterSpacing = (-0.2).sp)
             }
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(32.dp))
             ParentTitle(stringResource(R.string.welcome_title), large = true)
-            Spacer(Modifier.height(26.dp))
-            WelcomeIllustration()
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(24.dp))
+            WelcomeIllustration(Modifier.fillMaxWidth().weight(1f))
+            Spacer(Modifier.height(16.dp))
         }
         PrimaryButton(stringResource(R.string.welcome_start), onNext)
         Spacer(Modifier.height(16.dp))
@@ -146,11 +147,11 @@ fun GuardScreen(vm: LauncherViewModel, step: Int?, onBack: () -> Unit, onDone: (
         FlowHeader(onBack = onBack, step = step, totalSteps = Onboard.COUNT)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
             ParentTitle(stringResource(R.string.guard_title))
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.height(8.dp))
             ParentBody(stringResource(R.string.guard_body))
             Spacer(Modifier.height(4.dp))
             WhyLink(onClick = { showWhy = true })
-            Spacer(Modifier.height(14.dp))
+            Spacer(Modifier.height(12.dp))
             if (on) {
                 ParentCard(background = ParentColors.greenBg, border = ParentColors.green, padding = 16.dp) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -256,6 +257,7 @@ private fun GuardWhyDialog(onDismiss: () -> Unit) {
                         stringResource(R.string.guard_why_never_1),
                         stringResource(R.string.guard_why_never_2),
                         stringResource(R.string.guard_why_never_3),
+                        stringResource(R.string.guard_why_never_4),
                     ),
                 )
             }

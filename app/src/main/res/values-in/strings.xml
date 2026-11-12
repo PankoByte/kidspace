@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Mengembalikan anak ke layar utama dari aplikasi yang tidak Anda pilih</string>
     <string name="guard_why_does_3">Menutup panel notifikasi</string>
     <string name="guard_why_never">Yang tidak pernah dilakukan</string>
-    <string name="guard_why_never_1">Membaca layar, pesan, atau sandi</string>
-    <string name="guard_why_never_2">Mengirim apa pun keluar dari ponsel ini. Kid Space tidak punya akses internet.</string>
-    <string name="guard_why_never_3">Melakukan apa pun saat mode anak nonaktif</string>
+    <string name="guard_why_never_1">Tidak pernah membaca layar, pesan, atau sandi Anda</string>
+    <string name="guard_why_never_2">Tidak pernah mengirim apa pun ke server mana pun</string>
+    <string name="guard_why_never_3">Tidak pernah terhubung ke internet. Tidak punya izin internet.</string>
+    <string name="guard_why_never_4">Tetap tidak aktif saat mode anak nonaktif</string>
     <string name="guard_why_ok">Mengerti</string>
     <string name="apps_title">Apa yang boleh mereka buka?</string>
     <string name="apps_search">Cari aplikasi</string>
@@ -121,6 +122,7 @@
     <string name="guide_step_allow">Ketuk Izinkan</string>
     <string name="guide_default">Setel sebagai default</string>
     <string name="dnd_guide_title">Izinkan Kid Space menyenyapkan notifikasi</string>
+    <string name="dnd_guide_why">Selama mode anak, Kid Space mengaktifkan Jangan Ganggu agar notifikasi Anda tetap senyap saat anak bermain. Panggilan tetap berdering. Saat mode anak berakhir, ponsel Anda kembali seperti semula.</string>
     <string name="dnd_guide_open">Buka setelan</string>
     <string name="guide_dnd_screen">Akses Jangan Ganggu</string>
     <string name="guide_dnd_toggle">Izinkan Jangan Ganggu</string>

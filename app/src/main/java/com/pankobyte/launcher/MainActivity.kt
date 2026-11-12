@@ -51,6 +51,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        // A phone on its side is too short for the number pad, the one way out of Kid mode, so
+        // phones stay upright. Tablets and unfolded phones have the room and turn freely.
+        if (resources.configuration.smallestScreenWidthDp < 600) {
+            requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
         setContent { LauncherRoot(vm, onFinish = ::finish) }
     }
 

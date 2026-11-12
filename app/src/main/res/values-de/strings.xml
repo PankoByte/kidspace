@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Schickt Ihr Kind aus nicht gewählten Apps zurück zum Startbildschirm</string>
     <string name="guard_why_does_3">Schließt die Benachrichtigungsleiste</string>
     <string name="guard_why_never">Was es nie tut</string>
-    <string name="guard_why_never_1">Den Bildschirm, Nachrichten oder Passwörter lesen</string>
-    <string name="guard_why_never_2">Etwas von diesem Telefon senden. Kid Space hat keinen Internetzugriff.</string>
-    <string name="guard_why_never_3">Etwas tun, während der Kindermodus aus ist</string>
+    <string name="guard_why_never_1">Liest nie Ihren Bildschirm, Ihre Nachrichten oder Passwörter</string>
+    <string name="guard_why_never_2">Sendet nie etwas an einen Server</string>
+    <string name="guard_why_never_3">Verbindet sich nie mit dem Internet. Es hat keine Internetberechtigung.</string>
+    <string name="guard_why_never_4">Bleibt inaktiv, solange der Kindermodus aus ist</string>
     <string name="guard_why_ok">Verstanden</string>
     <string name="apps_title">Was dürfen sie öffnen?</string>
     <string name="apps_search">Apps suchen</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">Tippe auf Zulassen</string>
     <string name="guide_default">Als Standard festlegen</string>
     <string name="dnd_guide_title">Kid Space das Stummschalten erlauben</string>
+    <string name="dnd_guide_why">Im Kindermodus schaltet Kid Space „Bitte nicht stören“ ein, damit Ihre Benachrichtigungen stumm bleiben, während Ihr Kind spielt. Anrufe klingeln weiterhin. Endet der Kindermodus, ist Ihr Telefon wieder wie vorher.</string>
     <string name="dnd_guide_open">Einstellungen öffnen</string>
     <string name="guide_dnd_screen">Zugriff auf „Bitte nicht stören“</string>
     <string name="guide_dnd_toggle">„Bitte nicht stören“ zulassen</string>

@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">يعيد طفلك إلى الشاشة الرئيسية من التطبيقات التي لم تخترها</string>
     <string name="guard_why_does_3">يغلق لوحة الإشعارات</string>
     <string name="guard_why_never">ما لا يفعله أبدًا</string>
-    <string name="guard_why_never_1">قراءة الشاشة أو الرسائل أو كلمات المرور</string>
-    <string name="guard_why_never_2">إرسال أي شيء خارج هذا الهاتف. لا يملك Kid Space إذنًا بالوصول إلى الإنترنت.</string>
-    <string name="guard_why_never_3">فعل أي شيء عندما يكون وضع الطفل متوقفًا</string>
+    <string name="guard_why_never_1">لا يقرأ أبدًا شاشتك أو رسائلك أو كلمات مرورك</string>
+    <string name="guard_why_never_2">لا يرسل أبدًا أي شيء إلى أي خادم</string>
+    <string name="guard_why_never_3">لا يتصل أبدًا بالإنترنت. لا يملك إذن الإنترنت.</string>
+    <string name="guard_why_never_4">يبقى غير نشط عندما يكون وضع الطفل متوقفًا</string>
     <string name="guard_why_ok">حسنًا</string>
     <string name="apps_title">ما الذي يمكنهم فتحه؟</string>
     <string name="apps_search">البحث في التطبيقات</string>
@@ -136,6 +137,7 @@
     <string name="guide_step_allow">انقر على السماح</string>
     <string name="guide_default">ضبط كتطبيق تلقائي</string>
     <string name="dnd_guide_title">اسمح لـ Kid Space بكتم الإشعارات</string>
+    <string name="dnd_guide_why">في وضع الطفل، يضع Kid Space هاتفك على «عدم الإزعاج» لتبقى إشعاراتك صامتة أثناء لعب طفلك. المكالمات ترنّ كالمعتاد. عند انتهاء وضع الطفل يعود هاتفك كما كان.</string>
     <string name="dnd_guide_open">فتح الإعدادات</string>
     <string name="guide_dnd_screen">الوصول إلى “عدم الإزعاج”</string>
     <string name="guide_dnd_toggle">السماح بميزة “عدم الإزعاج”</string>

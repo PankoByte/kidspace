@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
@@ -140,7 +141,7 @@ private fun KidHomeScreen(vm: LauncherViewModel, snapshot: KidSnapshot) {
                 front = if (low) KidColors.lowHillFront else KidColors.hillFront,
             )
         }
-        Column(Modifier.fillMaxSize().systemBarsPadding().padding(horizontal = Dimens.kidMargin)) {
+        Column(Modifier.align(Alignment.TopCenter).systemBarsPadding().widthIn(max = Dimens.contentMaxWidth).fillMaxSize().padding(horizontal = Dimens.kidMargin)) {
             Spacer(Modifier.height(28.dp))
             Text(
                 stringResource(if (low) R.string.kid_low_title else R.string.kid_greeting),
@@ -390,7 +391,7 @@ private fun TimesUpScreen(vm: LauncherViewModel) {
 private fun ParentChoiceScreen(vm: LauncherViewModel) {
     Box(Modifier.fillMaxSize().background(NightColors.bg)) {
         Column(
-            Modifier.fillMaxSize().systemBarsPadding().padding(horizontal = Dimens.kidMargin),
+            Modifier.align(Alignment.TopCenter).systemBarsPadding().widthIn(max = Dimens.contentMaxWidth).fillMaxSize().padding(horizontal = Dimens.kidMargin),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.weight(1f))

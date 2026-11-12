@@ -27,9 +27,10 @@
     <string name="guard_why_does_2">Leva seu filho de volta ao início se abrir um app não escolhido</string>
     <string name="guard_why_does_3">Fecha o painel de notificações</string>
     <string name="guard_why_never">O que nunca faz</string>
-    <string name="guard_why_never_1">Ler a tela, mensagens ou senhas</string>
-    <string name="guard_why_never_2">Enviar nada para fora deste celular. O Kid Space não tem acesso à internet.</string>
-    <string name="guard_why_never_3">Fazer algo com o modo criança desligado</string>
+    <string name="guard_why_never_1">Nunca lê sua tela, suas mensagens ou senhas</string>
+    <string name="guard_why_never_2">Nunca envia nada para nenhum servidor</string>
+    <string name="guard_why_never_3">Nunca se conecta à internet. Não tem permissão de internet.</string>
+    <string name="guard_why_never_4">Fica inativo quando o modo criança está desligado</string>
     <string name="guard_why_ok">Entendi</string>
     <string name="apps_title">O que eles podem abrir?</string>
     <string name="apps_search">Buscar apps</string>
@@ -124,6 +125,7 @@
     <string name="guide_step_allow">Toque em Permitir</string>
     <string name="guide_default">Definir como padrão</string>
     <string name="dnd_guide_title">Permita que o Kid Space silencie as notificações</string>
+    <string name="dnd_guide_why">No modo criança, o Kid Space ativa o Não perturbe para que suas notificações fiquem em silêncio enquanto seu filho brinca. As chamadas continuam tocando. Ao sair do modo criança, seu celular volta a ficar como estava.</string>
     <string name="dnd_guide_open">Abrir configurações</string>
     <string name="guide_dnd_screen">Acesso ao Não perturbe</string>
     <string name="guide_dnd_toggle">Permitir Não perturbe</string>
