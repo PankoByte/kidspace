@@ -22,9 +22,22 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -126,6 +139,8 @@ fun GuardScreen(vm: LauncherViewModel, step: Int?, onBack: () -> Unit, onDone: (
     // During setup, coming back from Android with protection on goes straight to the next step.
     val moveOn by rememberUpdatedState(onDone)
     LaunchedEffect(on) { if (on && step != null) moveOn() }
+    var showWhy by rememberSaveable { mutableStateOf(false) }
+    if (showWhy) GuardWhyDialog(onDismiss = { showWhy = false })
 
     ParentScreen {
         FlowHeader(onBack = onBack, step = step, totalSteps = Onboard.COUNT)
@@ -133,7 +148,9 @@ fun GuardScreen(vm: LauncherViewModel, step: Int?, onBack: () -> Unit, onDone: (
             ParentTitle(stringResource(R.string.guard_title))
             Spacer(Modifier.height(6.dp))
             ParentBody(stringResource(R.string.guard_body))
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(4.dp))
+            WhyLink(onClick = { showWhy = true })
+            Spacer(Modifier.height(14.dp))
             if (on) {
                 ParentCard(background = ParentColors.greenBg, border = ParentColors.green, padding = 16.dp) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -182,3 +199,86 @@ fun GuardScreen(vm: LauncherViewModel, step: Int?, onBack: () -> Unit, onDone: (
     }
 }
 
+
+/** Small "Why this is needed" link with an info icon. Opens [GuardWhyDialog]. */
+@Composable
+private fun WhyLink(onClick: () -> Unit) {
+    Row(
+        // Pulled left so the icon, not its touch area, lines up with the text above.
+        Modifier
+            .offset(x = (-8).dp)
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(LineIcons.Info, null, tint = ParentColors.accent, modifier = Modifier.size(20.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(stringResource(R.string.guard_why_link), color = ParentColors.accent, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+    }
+}
+
+/**
+ * Plain-language answer to "why does Kid Space need Accessibility?": the reason, what the
+ * service does, and what it never does. Every line here must stay true to
+ * KidGuardAccessibilityService and kid_guard_service.xml (no window content, no internet).
+ */
+@Composable
+private fun GuardWhyDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = ParentColors.surface,
+        title = {
+            Text(stringResource(R.string.guard_why_title), color = ParentColors.ink, fontSize = 21.sp, lineHeight = 27.sp, fontWeight = FontWeight.Bold)
+        },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                Text(stringResource(R.string.guard_why_reason), color = ParentColors.ink, fontSize = 15.sp, lineHeight = 21.sp)
+                Spacer(Modifier.height(18.dp))
+                WhySection(
+                    heading = stringResource(R.string.guard_why_does),
+                    icon = LineIcons.Check,
+                    badge = ParentColors.greenBg,
+                    tint = ParentColors.green,
+                    lines = listOf(
+                        stringResource(R.string.guard_why_does_1),
+                        stringResource(R.string.guard_why_does_2),
+                        stringResource(R.string.guard_why_does_3),
+                    ),
+                )
+                Spacer(Modifier.height(18.dp))
+                WhySection(
+                    heading = stringResource(R.string.guard_why_never),
+                    icon = LineIcons.Close,
+                    badge = ParentColors.errorBg,
+                    tint = ParentColors.error,
+                    lines = listOf(
+                        stringResource(R.string.guard_why_never_1),
+                        stringResource(R.string.guard_why_never_2),
+                        stringResource(R.string.guard_why_never_3),
+                    ),
+                )
+            }
+        },
+        confirmButton = { PrimaryButton(stringResource(R.string.guard_why_ok), onDismiss) },
+    )
+}
+
+@Composable
+private fun WhySection(heading: String, icon: ImageVector, badge: Color, tint: Color, lines: List<String>) {
+    Text(
+        heading,
+        modifier = Modifier.semantics { heading() },
+        color = ParentColors.ink,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+    )
+    lines.forEach { line ->
+        Spacer(Modifier.height(10.dp))
+        Row(verticalAlignment = Alignment.Top) {
+            IconBadge(icon, size = 24.dp, background = badge, tint = tint)
+            Spacer(Modifier.width(10.dp))
+            Text(line, modifier = Modifier.padding(top = 2.dp), color = ParentColors.ink, fontSize = 15.sp, lineHeight = 20.sp)
+        }
+    }
+}

@@ -28,6 +28,19 @@
     <string name="guard_stuck">Switch app protection off, then on again to reconnect.</string>
     <string name="guard_agree">Agree and open settings</string>
     <string name="guard_on_title">App protection is ready</string>
+    <!-- Pop-up behind the "Why this is needed" link on the app protection step. -->
+    <string name="guard_why_link">Why this is needed</string>
+    <string name="guard_why_title">Why Kid Space needs this</string>
+    <string name="guard_why_reason">Android only lets an app see which app is open through Accessibility. Kid Space uses it for one job: keeping your child in the apps you chose.</string>
+    <string name="guard_why_does">What it does in Kid mode</string>
+    <string name="guard_why_does_1">Sees which app is open</string>
+    <string name="guard_why_does_2">Sends your child back home from apps you didn\'t choose</string>
+    <string name="guard_why_does_3">Closes the notification panel</string>
+    <string name="guard_why_never">What it never does</string>
+    <string name="guard_why_never_1">Read the screen, messages or passwords</string>
+    <string name="guard_why_never_2">Send anything off this phone. Kid Space has no internet access.</string>
+    <string name="guard_why_never_3">Do anything while Kid mode is off</string>
+    <string name="guard_why_ok">Got it</string>
 
     <!-- Setup step 3: choose apps -->
     <string name="apps_title">What can they open?</string>

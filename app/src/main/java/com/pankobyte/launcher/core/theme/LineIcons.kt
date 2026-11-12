@@ -137,6 +137,13 @@ object LineIcons {
             moveTo(18f, 6f); lineTo(6f, 18f)
         }
     }
+    val Info by lazy {
+        icon("info") {
+            circle(12f, 12f, 9f)
+            moveTo(12f, 11f); lineTo(12f, 16.5f)
+            moveTo(12f, 7.6f); lineTo(12f, 7.7f)
+        }
+    }
     val Moon by lazy {
         icon("moon") {
             moveTo(20f, 14.5f)
