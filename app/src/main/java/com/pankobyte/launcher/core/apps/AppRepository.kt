@@ -16,6 +16,7 @@ import android.util.LruCache
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.core.graphics.createBitmap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -110,7 +111,7 @@ class AppRepository(private val context: Context, private val scope: CoroutineSc
 
     /** Draws the icon as a full square so the screen can clip it to its own tile shape. */
     private fun render(drawable: Drawable): Bitmap {
-        val bitmap = Bitmap.createBitmap(iconPx, iconPx, Bitmap.Config.ARGB_8888)
+        val bitmap = createBitmap(iconPx, iconPx)
         val canvas = Canvas(bitmap)
         if (drawable is AdaptiveIconDrawable) {
             // Adaptive layers are 108 dp with a 72 dp visible centre: draw them 1.5 times larger.

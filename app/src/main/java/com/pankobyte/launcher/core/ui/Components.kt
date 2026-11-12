@@ -48,6 +48,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pankobyte.launcher.R
@@ -343,7 +344,7 @@ fun ParentSwitch(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
         Box(
             Modifier.size(52.dp, 32.dp).clip(CircleShape).background(if (checked) ParentColors.ink else ParentColors.switchOff),
         ) {
-            Box(Modifier.offset(x = knobX, y = 2.dp).size(28.dp).clip(CircleShape).background(Color.White))
+            Box(Modifier.offset { IntOffset(knobX.roundToPx(), 2.dp.roundToPx()) }.size(28.dp).clip(CircleShape).background(Color.White))
         }
     }
 }

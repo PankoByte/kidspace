@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "launcher"
+rootProject.name = "KidSpace"
 include(":app")
  

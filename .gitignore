@@ -1,31 +1,28 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-/.codex-qa/
-
-# IDE and tool state
-/.idea/
-/.kotlin/
-/graphify-out/
-
-# Build outputs and signing keys
+# Gradle and build outputs
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
 *.apk
 *.aab
+
+# Machine-specific settings
+local.properties
+
+# IDE and tool state
+.idea/
+.kotlin/
+*.iml
+.DS_Store
+/graphify-out/
+/.codex-qa/
+
+# Signing keys. Never commit these.
 *.jks
 *.keystore
 keystore.properties
 
-# Design reference files, kept outside the repo
+# Private working files: design references and store listing sources
 *.pdf
+/store-listing/

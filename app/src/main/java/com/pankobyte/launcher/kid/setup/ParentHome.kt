@@ -2,7 +2,6 @@ package com.pankobyte.launcher.kid.setup
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -53,6 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.pankobyte.launcher.LauncherViewModel
 import com.pankobyte.launcher.Onboard
@@ -492,7 +492,7 @@ fun SettingsScreen(vm: LauncherViewModel, settings: LauncherSettings) {
             }
             Spacer(Modifier.height(12.dp))
             val privacyUrl = stringResource(R.string.privacy_url)
-            ParentCard(onClick = { openSettings(Intent(Intent.ACTION_VIEW, Uri.parse(privacyUrl))) }, padding = 0.dp) {
+            ParentCard(onClick = { openSettings(Intent(Intent.ACTION_VIEW, privacyUrl.toUri())) }, padding = 0.dp) {
                 SettingRow(LineIcons.Eye, stringResource(R.string.settings_privacy), null) {
                     Icon(LineIcons.Chevron, null, tint = ParentColors.ink, modifier = Modifier.size(16.dp))
                 }
