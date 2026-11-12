@@ -10,7 +10,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GuardLogicTest {
-    private val own = "com.pankobyte.launcher"
+    private val own = "com.pankobyte.kidspace"
     private val ime = "com.keyboard"
     private val dialer = "com.dialer"
     private val inCall = "com.android.incallui"

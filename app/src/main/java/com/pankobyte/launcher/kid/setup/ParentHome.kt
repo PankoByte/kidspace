@@ -1,6 +1,8 @@
 package com.pankobyte.launcher.kid.setup
 
 import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -478,6 +480,13 @@ fun SettingsScreen(vm: LauncherViewModel, settings: LauncherSettings) {
             SectionLabel(stringResource(R.string.settings_pin))
             ParentCard(onClick = { vm.route = Route.PinGate }, padding = 0.dp) {
                 SettingRow(LineIcons.Key, stringResource(R.string.settings_change_pin), null) {
+                    Icon(LineIcons.Chevron, null, tint = ParentColors.ink, modifier = Modifier.size(16.dp))
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+            val privacyUrl = stringResource(R.string.privacy_url)
+            ParentCard(onClick = { openSettings(Intent(Intent.ACTION_VIEW, Uri.parse(privacyUrl))) }, padding = 0.dp) {
+                SettingRow(LineIcons.Eye, stringResource(R.string.settings_privacy), null) {
                     Icon(LineIcons.Chevron, null, tint = ParentColors.ink, modifier = Modifier.size(16.dp))
                 }
             }

@@ -87,6 +87,7 @@
     <string name="settings_guard_off">Выкл.</string>
     <string name="settings_pin">PIN-код родителя</string>
     <string name="settings_change_pin">Сменить PIN-код</string>
+    <string name="settings_privacy">Политика конфиденциальности</string>
     <string name="kid_greeting">Привет!</string>
     <string name="kid_low_title">Почти всё!</string>
     <string name="kid_minutes">%d мин</string>

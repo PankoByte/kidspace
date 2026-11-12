@@ -81,6 +81,7 @@
     <string name="settings_guard_off">Aus</string>
     <string name="settings_pin">Eltern-PIN</string>
     <string name="settings_change_pin">PIN ändern</string>
+    <string name="settings_privacy">Datenschutzerklärung</string>
     <string name="kid_greeting">Hallo!</string>
     <string name="kid_low_title">Fast fertig!</string>
     <string name="kid_minutes">%d Min.</string>

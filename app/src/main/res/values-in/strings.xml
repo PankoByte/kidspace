@@ -78,6 +78,7 @@
     <string name="settings_guard_off">Nonaktif</string>
     <string name="settings_pin">PIN orang tua</string>
     <string name="settings_change_pin">Ubah PIN</string>
+    <string name="settings_privacy">Kebijakan privasi</string>
     <string name="kid_greeting">Hai!</string>
     <string name="kid_low_title">Hampir selesai!</string>
     <string name="kid_minutes">%d mnt</string>

@@ -78,6 +78,7 @@
     <string name="settings_guard_off">已关闭</string>
     <string name="settings_pin">家长 PIN 码</string>
     <string name="settings_change_pin">更改 PIN 码</string>
+    <string name="settings_privacy">隐私政策</string>
     <string name="kid_greeting">你好！</string>
     <string name="kid_low_title">快结束啦！</string>
     <string name="kid_minutes">%d 分钟</string>

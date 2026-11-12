@@ -78,6 +78,7 @@
     <string name="settings_guard_off">オフ</string>
     <string name="settings_pin">保護者用 PIN</string>
     <string name="settings_change_pin">PIN を変更</string>
+    <string name="settings_privacy">プライバシーポリシー</string>
     <string name="kid_greeting">こんにちは！</string>
     <string name="kid_low_title">もうすぐおわり！</string>
     <string name="kid_minutes">%d分</string>

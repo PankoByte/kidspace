@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,20 +7,37 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+// Upload key details live in keystore.properties, which is kept out of git.
+val keystoreFile = rootProject.file("keystore.properties")
+val keystore = Properties().apply { if (keystoreFile.exists()) keystoreFile.inputStream().use { load(it) } }
+
 android {
     namespace = "com.pankobyte.launcher"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.pankobyte.launcher"
+        // The code package stays com.pankobyte.launcher. Only this ID is what Play and the phone see.
+        applicationId = "com.pankobyte.kidspace"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }
 
+    signingConfigs {
+        if (keystoreFile.exists()) {
+            create("release") {
+                storeFile = rootProject.file(keystore.getProperty("storeFile"))
+                storePassword = keystore.getProperty("storePassword")
+                keyAlias = keystore.getProperty("keyAlias")
+                keyPassword = keystore.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -32,6 +51,10 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    lint {
+        // "apps chosen" follows a number shown in a badge, so its plural forms carry no %d on purpose.
+        disable += "ImpliedQuantity"
     }
 }
 

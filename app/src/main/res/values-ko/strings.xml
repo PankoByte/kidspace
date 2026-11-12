@@ -78,6 +78,7 @@
     <string name="settings_guard_off">꺼짐</string>
     <string name="settings_pin">부모 PIN</string>
     <string name="settings_change_pin">PIN 변경</string>
+    <string name="settings_privacy">개인정보처리방침</string>
     <string name="kid_greeting">안녕!</string>
     <string name="kid_low_title">거의 끝났어요!</string>
     <string name="kid_minutes">%d분</string>

@@ -81,6 +81,7 @@
     <string name="settings_guard_off">Desativada</string>
     <string name="settings_pin">PIN dos pais</string>
     <string name="settings_change_pin">Alterar PIN</string>
+    <string name="settings_privacy">Política de privacidade</string>
     <string name="kid_greeting">Olá!</string>
     <string name="kid_low_title">Quase acabando!</string>
     <string name="kid_minutes">%d min</string>

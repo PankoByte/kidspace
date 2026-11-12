@@ -104,6 +104,8 @@
     <string name="settings_guard_off">Off</string>
     <string name="settings_pin">Parent PIN</string>
     <string name="settings_change_pin">Change PIN</string>
+    <string name="settings_privacy">Privacy policy</string>
+    <string name="privacy_url" translatable="false">https://pankobyte.com/kidspace/privacy</string>
 
     <!-- Kid mode: kid-facing screens -->
     <string name="kid_greeting">Hi there!</string>

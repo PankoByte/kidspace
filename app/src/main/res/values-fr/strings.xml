@@ -81,6 +81,7 @@
     <string name="settings_guard_off">Désactivée</string>
     <string name="settings_pin">Code parental</string>
     <string name="settings_change_pin">Modifier le code</string>
+    <string name="settings_privacy">Politique de confidentialité</string>
     <string name="kid_greeting">Coucou !</string>
     <string name="kid_low_title">Presque fini !</string>
     <string name="kid_minutes">%d min</string>

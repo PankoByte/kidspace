@@ -93,6 +93,7 @@
     <string name="settings_guard_off">متوقفة</string>
     <string name="settings_pin">رقم التعريف للوالدين</string>
     <string name="settings_change_pin">تغيير رقم التعريف</string>
+    <string name="settings_privacy">سياسة الخصوصية</string>
     <string name="kid_greeting">مرحبًا!</string>
     <string name="kid_low_title">أوشكنا على الانتهاء!</string>
     <string name="kid_minutes">%d د</string>

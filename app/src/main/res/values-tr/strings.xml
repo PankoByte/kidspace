@@ -81,6 +81,7 @@
     <string name="settings_guard_off">Kapalı</string>
     <string name="settings_pin">Ebeveyn PIN\'i</string>
     <string name="settings_change_pin">PIN\'i değiştir</string>
+    <string name="settings_privacy">Gizlilik politikası</string>
     <string name="kid_greeting">Merhaba!</string>
     <string name="kid_low_title">Az kaldı!</string>
     <string name="kid_minutes">%d dk</string>

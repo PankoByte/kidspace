@@ -81,6 +81,7 @@
     <string name="settings_guard_off">बंद</string>
     <string name="settings_pin">पैरंट पिन</string>
     <string name="settings_change_pin">पिन बदलें</string>
+    <string name="settings_privacy">गोपनीयता नीति</string>
     <string name="kid_greeting">नमस्ते!</string>
     <string name="kid_low_title">बस थोड़ा और!</string>
     <string name="kid_minutes">%d मिनट</string>
