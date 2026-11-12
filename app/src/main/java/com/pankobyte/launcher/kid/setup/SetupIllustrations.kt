@@ -188,13 +188,7 @@ private fun DrawScope.finger(at: Offset, press: Float, alpha: Float) {
 }
 
 /** The app's icon, small. */
-private fun DrawScope.mark(x: Float, y: Float, side: Float, alpha: Float = 1f) {
-    box(ParentColors.accent, x, y, side, side, side * 0.3f, alpha)
-    val cell = side * 0.2f
-    for (row in 0..1) for (col in 0..1) {
-        box(Color.White, x + side * 0.24f + col * side * 0.32f, y + side * 0.24f + row * side * 0.32f, cell, cell, cell * 0.3f, alpha)
-    }
-}
+private fun DrawScope.mark(x: Float, y: Float, side: Float, alpha: Float = 1f) = drawLogo(x, y, side, alpha)
 
 /** A thin playback bar along the bottom, as on a video. */
 private fun DrawScope.playbackBar(t: Float, y: Float) {

@@ -13,10 +13,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
@@ -35,23 +37,34 @@ import com.pankobyte.launcher.core.theme.ParentColors
 /** The app's logo: the frog from the app icon (ic_launcher_foreground.xml), drawn in code. */
 @Composable
 fun SpaceMark(modifier: Modifier = Modifier) {
-    val green = Color(0xFF6FBF73)
-    val cheek = Color(0xBFF4A6A0)
-    Canvas(modifier.size(36.dp).clip(RoundedCornerShape(11.dp)).background(Color(0xFFFBF4E4))) {
+    Canvas(modifier.size(36.dp)) { drawLogo(0f, 0f, size.width) }
+}
+
+private val LogoCream = Color(0xFFFBF4E4)
+private val LogoGreen = Color(0xFF6FBF73)
+private val LogoCheek = Color(0xBFF4A6A0)
+
+/**
+ * The logo as a rounded tile of [side] with its top left at [x], [y]: the same frog as the app
+ * icon, for drawings that show the app, such as the settings guides in setup.
+ */
+fun DrawScope.drawLogo(x: Float, y: Float, side: Float, alpha: Float = 1f) {
+    drawRoundRect(LogoCream, Offset(x, y), Size(side, side), CornerRadius(side * 0.3f), alpha = alpha)
+    translate(x, y) {
         // Same numbers as the icon, whose visible part is the middle 72 of a 108 grid.
-        scale(size.width / 72f, pivot = Offset.Zero) {
+        scale(side / 72f, pivot = Offset.Zero) {
             translate(-18f, -20.5f) {
-                for (x in listOf(39.3f, 68.7f)) drawCircle(green, 11.025f, Offset(x, 42.05f))
-                drawOval(green, Offset(25.65f, 41.525f), Size(56.7f, 40.95f))
-                for (x in listOf(39.3f, 68.7f)) drawCircle(Color.White, 7.14f, Offset(x, 42.05f))
-                for (x in listOf(39.825f, 68.175f)) {
-                    drawCircle(ParentColors.ink, 3.78f, Offset(x, 42.575f))
-                    drawCircle(Color.White, 1.36f, Offset(x - 1.134f, 41.25f))
+                for (cx in listOf(39.3f, 68.7f)) drawCircle(LogoGreen, 11.025f, Offset(cx, 42.05f), alpha = alpha)
+                drawOval(LogoGreen, Offset(25.65f, 41.525f), Size(56.7f, 40.95f), alpha = alpha)
+                for (cx in listOf(39.3f, 68.7f)) drawCircle(Color.White, 7.14f, Offset(cx, 42.05f), alpha = alpha)
+                for (cx in listOf(39.825f, 68.175f)) {
+                    drawCircle(ParentColors.ink, 3.78f, Offset(cx, 42.575f), alpha = alpha)
+                    drawCircle(Color.White, 1.36f, Offset(cx - 1.134f, 41.25f), alpha = alpha)
                 }
-                for (x in listOf(33.525f, 74.475f)) drawCircle(cheek, 3.57f, Offset(x, 64.1f))
+                for (cx in listOf(33.525f, 74.475f)) drawCircle(LogoCheek, 3.57f, Offset(cx, 64.1f), alpha = alpha)
                 drawArc(
                     ParentColors.ink, 15f, 150f, false, Offset(36.15f, 47.3f), Size(35.7f, 23.1f),
-                    style = Stroke(2.31f, cap = StrokeCap.Round),
+                    alpha = alpha, style = Stroke(2.31f, cap = StrokeCap.Round),
                 )
             }
         }
