@@ -16,6 +16,9 @@ class GuardLogicTest {
     private val inCall = "com.android.incallui"
     private val game = "com.game"
     private val settings = "com.android.settings"
+    private val chrome = "com.android.chrome"
+    private val permissions = "com.google.android.permissioncontroller"
+    private val gameTools = "com.samsung.android.game.gametools"
 
     private val ctx = AllowContext(
         ownPackage = own,
@@ -25,6 +28,7 @@ class GuardLogicTest {
         callActive = false,
         emergencyOpen = false,
         allowedPackages = setOf(game),
+        iconPackages = setOf(game, settings, dialer, chrome),
     )
 
     @Test fun rule1_offAllowsEverything() {
@@ -73,10 +77,35 @@ class GuardLogicTest {
         assertEquals(GuardAction.ALLOW, decide(game, RUNNING, ctx))
     }
 
-    @Test fun rule9_everythingElseGoesHome() {
+    @Test fun rule9_appWithAnIconThatIsNotAllowedGoesHome() {
         assertEquals(GuardAction.GO_HOME, decide(settings, RUNNING, ctx))
-        assertEquals(GuardAction.GO_HOME, decide("com.android.vending", RUNNING, ctx))
-        assertEquals(GuardAction.GO_HOME, decide("com.google.android.permissioncontroller", RUNNING, ctx))
+        assertEquals(GuardAction.GO_HOME, decide(chrome, RUNNING, ctx))
+    }
+
+    @Test fun rule10_alwaysBlockedGoesHomeEvenWithoutAnIcon() {
+        val noIcons = ctx.copy(iconPackages = emptySet())
+        assertEquals(GuardAction.GO_HOME, decide("com.android.vending", RUNNING, noIcons))
+        assertEquals(GuardAction.GO_HOME, decide("com.google.android.packageinstaller", RUNNING, noIcons))
+        assertEquals(GuardAction.GO_HOME, decide(settings, RUNNING, noIcons))
+    }
+
+    @Test fun rule11_partsOfThePhoneWithoutAnIconAreLeftAlone() {
+        // Permission pop-up, Google sign-in, crash dialog, a brand's game helper.
+        assertEquals(GuardAction.ALLOW, decide(permissions, RUNNING, ctx))
+        assertEquals(GuardAction.ALLOW, decide("com.google.android.gms", RUNNING, ctx))
+        assertEquals(GuardAction.ALLOW, decide("android", RUNNING, ctx))
+        assertEquals(GuardAction.ALLOW, decide(gameTools, RUNNING, ctx))
+    }
+
+    @Test fun timesUpStillSendsIconlessPartsHome() {
+        assertEquals(GuardAction.GO_HOME, decide(permissions, TIMES_UP, ctx))
+    }
+
+    @Test fun everythingIsBlockedUntilTheAppListIsKnown() {
+        val loading = ctx.copy(iconPackages = null)
+        assertEquals(GuardAction.GO_HOME, decide(permissions, RUNNING, loading))
+        assertEquals(GuardAction.GO_HOME, decide(gameTools, RUNNING, loading))
+        assertEquals(GuardAction.ALLOW, decide(game, RUNNING, loading))
     }
 
     @Test fun noKeyboardSetDoesNotAllowAnything() {
@@ -96,6 +125,16 @@ class GuardLogicTest {
         // Any other app after the dialer closes the window, our own home screen included.
         assertNull(w.onForeground(settings, 1_000, dialer, pass))
         assertNull(w.onForeground(own, 1_000, dialer, pass))
+    }
+
+    @Test fun overlaysAreToldApartFromAppScreens() {
+        // Samsung edge panel, Game Tools and gesture handles report plain view classes.
+        assertTrue(isOverlayWindow("android.widget.FrameLayout"))
+        assertTrue(isOverlayWindow("android.view.ViewGroup"))
+        // App screens and dialogs are judged by the allowlist. So is anything unknown.
+        assertFalse(isOverlayWindow("com.unity3d.player.UnityPlayerActivity"))
+        assertFalse(isOverlayWindow("android.app.AlertDialog"))
+        assertFalse(isOverlayWindow(null))
     }
 
     @Test fun emergencyWindowHasThreeMinuteCap() {

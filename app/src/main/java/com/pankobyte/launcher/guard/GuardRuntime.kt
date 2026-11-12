@@ -6,13 +6,23 @@ import android.media.AudioManager
 import android.os.SystemClock
 import android.provider.Settings
 import android.telecom.TelecomManager
+import com.pankobyte.launcher.core.apps.AppEntry
+import com.pankobyte.launcher.core.apps.AppRepository
 import com.pankobyte.launcher.kid.session.KidSessionManager
 import com.pankobyte.launcher.kid.session.KidSessionState
 
 /** Reads the live device facts the allowlist needs and applies [decide]. Shared by both guards. */
-class GuardRuntime(private val context: Context, private val kid: KidSessionManager) {
+class GuardRuntime(
+    private val context: Context,
+    private val kid: KidSessionManager,
+    private val apps: AppRepository,
+) {
     private val audio = context.getSystemService(AudioManager::class.java)
     private val telecom = context.getSystemService(TelecomManager::class.java)
+
+    // The icon set is rebuilt only when the app list itself is replaced.
+    @Volatile private var iconSource: List<AppEntry>? = null
+    @Volatile private var iconSet: Set<String> = emptySet()
 
     fun evaluate(pkg: String): GuardAction {
         val snapshot = kid.snapshot.value ?: return GuardAction.ALLOW
@@ -33,8 +43,20 @@ class GuardRuntime(private val context: Context, private val kid: KidSessionMana
             callActive = audio.mode == AudioManager.MODE_RINGTONE || audio.mode == AudioManager.MODE_IN_CALL,
             emergencyOpen = window?.isOpen(now) == true,
             allowedPackages = snapshot.allowedPackages,
+            iconPackages = iconPackages(),
         )
         return decide(pkg, snapshot.state, ctx)
+    }
+
+    /** Packages with an app drawer icon, or null until the app list has been read once. */
+    private fun iconPackages(): Set<String>? {
+        if (!apps.loaded.value) return null
+        val list = apps.apps.value
+        if (list !== iconSource) {
+            iconSet = list.mapTo(HashSet()) { it.packageName }
+            iconSource = list
+        }
+        return iconSet
     }
 
     private companion object {

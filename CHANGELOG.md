@@ -2,6 +2,12 @@
 
 Notable changes to Kid Space, newest first. Version numbers match `versionName` in `app/build.gradle.kts`.
 
+## 1.1 (2026-11-13)
+
+- Fixed allowed apps closing right after they opened on Samsung phones. Floating helpers such as the edge panel and Game Tools were mistaken for a blocked app.
+- App protection now blocks any app that has an icon in the app drawer and is not on the parent's list. Parts of the phone without an icon, such as permission pop-ups, Google sign-in and crash dialogs, stay open so allowed apps keep working.
+- App installers, Settings, app stores, the file browser and Bixby stay blocked whether or not they have an icon.
+
 ## 1.0 (2026-11-13)
 
 First public release.

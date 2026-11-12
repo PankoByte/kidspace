@@ -26,6 +26,9 @@ class KidGuardAccessibilityService : AccessibilityService() {
             event.eventType != AccessibilityEvent.TYPE_WINDOWS_CHANGED
         ) return
         val pkg = event.packageName?.toString() ?: return
+        // Overlays from apps running in the background are not the app in front. System UI is the
+        // exception: its shade is an overlay and still has to be closed.
+        if (pkg != SYSTEM_UI_PACKAGE && isOverlayWindow(event.className?.toString())) return
         when (AppContainer.guard.evaluate(pkg)) {
             GuardAction.ALLOW -> Unit
             GuardAction.GO_HOME -> performGlobalAction(GLOBAL_ACTION_HOME)

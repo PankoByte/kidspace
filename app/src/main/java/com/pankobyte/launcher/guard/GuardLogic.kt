@@ -17,9 +17,45 @@ data class AllowContext(
     val emergencyOpen: Boolean,
     /** Apps the parent allowed for the active profile. */
     val allowedPackages: Set<String>,
+    /**
+     * Every app that has an icon in the app drawer, which covers all apps the user installed.
+     * Null while the list is still loading: until then anything not allowed is blocked.
+     */
+    val iconPackages: Set<String>?,
 )
 
-/** Decides what the guard does when [pkg] comes to the front. First matching rule wins. */
+/**
+ * Apps that are blocked even though they have no icon in the app drawer, because a child could
+ * install, delete or change things from them. Checked on real devices as they are tested.
+ */
+val ALWAYS_BLOCKED_PACKAGES = setOf(
+    // Installers: adding or removing apps.
+    "com.android.packageinstaller",
+    "com.google.android.packageinstaller",
+    "com.samsung.android.packageinstaller",
+    "com.miui.packageinstaller",
+    // Settings and its search screen.
+    "com.android.settings",
+    "com.android.settings.intelligence",
+    "com.google.android.settings.intelligence",
+    // Stores.
+    "com.android.vending",
+    "com.sec.android.app.samsungapps",
+    // File browser: files can be deleted from it.
+    "com.android.documentsui",
+    "com.google.android.documentsui",
+    // Voice assistant.
+    "com.samsung.android.bixby.agent",
+)
+
+/**
+ * Decides what the guard does when [pkg] comes to the front. First matching rule wins.
+ *
+ * An app with an icon that the parent did not allow is sent home. Parts of the phone without an
+ * icon (permission pop-ups, Google sign-in, crash dialogs, each brand's game and gesture helpers)
+ * are left alone, so an allowed app keeps working on every brand. [ALWAYS_BLOCKED_PACKAGES]
+ * lists the icon-less parts that are still blocked.
+ */
 fun decide(pkg: String, state: KidSessionState, ctx: AllowContext): GuardAction = when {
     state == KidSessionState.OFF -> GuardAction.ALLOW
     pkg == ctx.ownPackage -> GuardAction.ALLOW
@@ -31,8 +67,23 @@ fun decide(pkg: String, state: KidSessionState, ctx: AllowContext): GuardAction 
     pkg == SYSTEM_UI_PACKAGE -> GuardAction.DISMISS_SHADE
     state == KidSessionState.TIMES_UP -> GuardAction.GO_HOME
     pkg in ctx.allowedPackages -> GuardAction.ALLOW
-    else -> GuardAction.GO_HOME
+    // The call screen has no icon on some phones. With no call going on it stays blocked.
+    pkg in ctx.dialerPackages -> GuardAction.GO_HOME
+    pkg in ALWAYS_BLOCKED_PACKAGES -> GuardAction.GO_HOME
+    ctx.iconPackages == null || pkg in ctx.iconPackages -> GuardAction.GO_HOME
+    else -> GuardAction.ALLOW
 }
+
+/**
+ * True when a window event comes from a floating overlay and not from an app screen.
+ *
+ * An app screen reports its Activity class. Overlays drawn over the app in front (Samsung edge
+ * panel, Game Tools, side gesture handles, Samsung Pay swipe handle) report a plain framework
+ * view class. They do not put their app in front, so the allowlist must not judge them.
+ * Unknown or missing class names count as an app screen, which keeps the guard strict.
+ */
+fun isOverlayWindow(className: String?): Boolean =
+    className != null && (className.startsWith("android.widget.") || className.startsWith("android.view."))
 
 const val EMERGENCY_CAP_MS = 3 * 60_000L
 

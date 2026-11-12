@@ -20,11 +20,13 @@ object AppContainer {
     val db: LauncherDb by lazy { LauncherDb.create(appContext) }
     val apps: AppRepository by lazy { AppRepository(appContext, scope) }
     val kid: KidSessionManager by lazy { KidSessionManager(appContext, settings, db, scope) }
-    val guard: GuardRuntime by lazy { GuardRuntime(appContext, kid) }
+    val guard: GuardRuntime by lazy { GuardRuntime(appContext, kid, apps) }
 
     fun init(context: Context) {
         appContext = context.applicationContext
         // Read the saved Kid mode state at once, so a restart lands on the kid home.
         kid
+        // The guard needs the app list. Start reading it now, so it is ready before the first check.
+        apps
     }
 }
