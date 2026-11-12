@@ -100,7 +100,7 @@
     <string name="guard_service_label">Kid Space ऐप सुरक्षा</string>
     <string name="guard_service_summary">किड मोड चालू रहने पर बच्चे को आपके मंज़ूर किए गए ऐप के अंदर रखती है.</string>
     <string name="guard_service_description">Kid Space इस सेवा का इस्तेमाल पैरंटल कंट्रोल के लिए करता है. किड मोड चालू रहने पर यह देखता है कि सामने कौन सा ऐप खुला है और अगर वह आपका मंज़ूर किया हुआ ऐप नहीं है, तो बच्चे की होम स्क्रीन पर लौट जाता है. यह स्क्रीन पर लिखी चीज़ें नहीं पढ़ता और कुछ भी इस फ़ोन से बाहर नहीं जाता. किड मोड बंद होने पर यह कुछ नहीं करता.</string>
-    <string name="welcome_animation_description">Kid Space पर टैप करने से फ़ोन के अंदर एक घिरी हुई जगह खुलती है. गेम और ड्रॉइंग अंदर रहते हैं; दूसरे ऐप बाहर रहते हैं.</string>
+    <string name="welcome_animation_description">आपके ऐप एक ताला लगे कंटेनर में जाते हैं, जो स्क्रीन से बाहर खिसक जाता है. उसकी जगह बच्चे के ऐप वाला अलग Kid Space आ जाता है.</string>
     <string name="guard_guide_description">सुलभता में डाउनलोड किए गए ऐप्लिकेशन खोलें, Kid Space ऐप सुरक्षा चुनें, Kid Space ऐप सुरक्षा का इस्तेमाल करें को चालू करें, फिर अनुमति दें पर टैप करें.</string>
     <string name="guide_accessibility">सुलभता</string>
     <string name="guide_downloaded">डाउनलोड किए गए ऐप्लिकेशन</string>

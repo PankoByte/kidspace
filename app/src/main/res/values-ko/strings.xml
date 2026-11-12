@@ -97,7 +97,7 @@
     <string name="guard_service_label">Kid Space 앱 보호</string>
     <string name="guard_service_summary">키즈 모드가 켜져 있는 동안 아이가 승인한 앱 안에서만 머물게 합니다.</string>
     <string name="guard_service_description">Kid Space는 자녀 보호를 위해 이 서비스를 사용합니다. 키즈 모드가 켜져 있는 동안 어떤 앱이 화면에 있는지 확인하고, 승인하지 않은 앱이면 아이의 홈 화면으로 돌아갑니다. 화면 내용을 읽지 않으며 어떤 정보도 이 휴대전화 밖으로 나가지 않습니다. 키즈 모드가 꺼져 있으면 아무 작업도 하지 않습니다.</string>
-    <string name="welcome_animation_description">Kid Space를 탭하면 휴대전화 안에 구분된 공간이 열립니다. 게임과 그림 그리기는 그 안에 있고 다른 앱은 밖에 있습니다.</string>
+    <string name="welcome_animation_description">내 앱이 잠긴 컨테이너에 들어가 화면 밖으로 밀려납니다. 그 자리에 아이의 앱이 담긴 별도의 Kid Space가 나타납니다.</string>
     <string name="guard_guide_description">접근성에서 다운로드한 앱을 열고 Kid Space 앱 보호를 선택한 다음 Kid Space 앱 보호 사용을 켜고 허용을 탭하세요.</string>
     <string name="guide_accessibility">접근성</string>
     <string name="guide_downloaded">다운로드한 앱</string>

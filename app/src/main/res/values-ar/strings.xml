@@ -112,7 +112,7 @@
     <string name="guard_service_label">حماية التطبيقات من Kid Space</string>
     <string name="guard_service_summary">تُبقي الطفل داخل التطبيقات التي وافقت عليها ما دام وضع الأطفال مفعَّلًا.</string>
     <string name="guard_service_description">يستخدم Kid Space هذه الخدمة للرقابة الأبوية. ما دام وضع الأطفال مفعَّلًا، ترى الخدمة أي تطبيق في الواجهة وتعود إلى شاشة الطفل الرئيسية إذا لم يكن من التطبيقات التي وافقت عليها. لا تقرأ ما يظهر على الشاشة، ولا يغادر أي شيء هذا الهاتف. ولا تفعل شيئًا عندما يكون وضع الأطفال متوقفًا.</string>
-    <string name="welcome_animation_description">النقر على Kid Space يفتح منطقة محدودة داخل الهاتف. الألعاب والرسم تبقى في الداخل، والتطبيقات الأخرى تبقى في الخارج.</string>
+    <string name="welcome_animation_description">تدخل تطبيقاتك في حاوية مقفلة تنزلق خارج الشاشة. ويحل مكانها Kid Space منفصل فيه تطبيقات الطفل.</string>
     <string name="guard_guide_description">في تسهيل الاستخدام، افتح التطبيقات التي تم تنزيلها، اختر حماية التطبيقات من Kid Space، فعِّل استخدام حماية التطبيقات من Kid Space، ثم انقر على السماح.</string>
     <string name="guide_accessibility">تسهيل الاستخدام</string>
     <string name="guide_downloaded">التطبيقات التي تم تنزيلها</string>

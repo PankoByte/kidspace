@@ -100,7 +100,7 @@
     <string name="guard_service_label">Kid Space uygulama koruması</string>
     <string name="guard_service_summary">Çocuk modu açıkken çocuğu onayladığınız uygulamaların içinde tutar.</string>
     <string name="guard_service_description">Kid Space bu hizmeti ebeveyn denetimi için kullanır. Çocuk modu açıkken hangi uygulamanın önde olduğunu görür ve bu uygulama onayladıklarınızdan biri değilse çocuğun ana ekranına döner. Ekrandakileri okumaz ve hiçbir şey bu telefondan dışarı çıkmaz. Çocuk modu kapalıyken hiçbir şey yapmaz.</string>
-    <string name="welcome_animation_description">Kid Space\'e dokununca telefonun içinde sınırlı bir alan açılır. Oyunlar ve çizim içeride kalır; diğer uygulamalar dışarıda kalır.</string>
+    <string name="welcome_animation_description">Kendi uygulamalarınız kilitli bir kutuya girer ve ekranın dışına kayar. Yerine, çocuğun uygulamalarını içeren ayrı bir Kid Space gelir.</string>
     <string name="guard_guide_description">Erişilebilirlik bölümünde İndirilen uygulamalar\'ı açın, Kid Space uygulama koruması\'nı seçin, Kid Space uygulama koruması hizmetini kullan\'ı açın, ardından İzin ver\'e dokunun.</string>
     <string name="guide_accessibility">Erişilebilirlik</string>
     <string name="guide_downloaded">İndirilen uygulamalar</string>

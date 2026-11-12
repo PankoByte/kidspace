@@ -97,7 +97,7 @@
     <string name="guard_service_label">Kid Space アプリ保護</string>
     <string name="guard_service_summary">キッズモードがオンの間、許可したアプリの中だけでお子さまが遊べるようにします。</string>
     <string name="guard_service_description">Kid Space はこのサービスを保護者による管理のために使用します。キッズモードがオンの間、前面に表示されているアプリを確認し、許可していないアプリの場合はお子さまのホーム画面に戻ります。画面の内容は読み取らず、このスマホの外には何も送信されません。キッズモードがオフの間は何もしません。</string>
-    <string name="welcome_animation_description">Kid Space をタップすると、スマホの中に区切られたエリアが開きます。ゲームやお絵かきはその中にあり、ほかのアプリは外にあります。</string>
+    <string name="welcome_animation_description">あなたのアプリはロックされたコンテナに入り、画面の外へスライドします。代わりに、お子さまのアプリが入った別の Kid Space が現れます。</string>
     <string name="guard_guide_description">「ユーザー補助」で「ダウンロードしたアプリ」を開き、「Kid Space アプリ保護」を選んで「Kid Space アプリ保護の使用」をオンにし、「許可」をタップします。</string>
     <string name="guide_accessibility">ユーザー補助</string>
     <string name="guide_downloaded">ダウンロードしたアプリ</string>

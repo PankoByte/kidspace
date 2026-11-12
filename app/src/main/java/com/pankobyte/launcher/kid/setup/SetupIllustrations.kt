@@ -53,105 +53,85 @@ import kotlin.math.sin
 
 /** A single paced loop. Android's disabled-animation setting gets a complete, still scene. */
 @Composable
-private fun illustrationProgress(): State<Float> {
+private fun illustrationProgress(loopMillis: Int = 9000): State<Float> {
     if (!ValueAnimator.areAnimatorsEnabled()) return rememberUpdatedState(0.7f)
     return rememberInfiniteTransition(label = "setupIllustration").animateFloat(
         initialValue = 0f, targetValue = 1f,
-        animationSpec = infiniteRepeatable(tween(9000, easing = LinearEasing)),
+        animationSpec = infiniteRepeatable(tween(loopMillis, easing = LinearEasing)),
         label = "illustrationProgress",
     )
 }
 
 private fun smooth(value: Float): Float = value.coerceIn(0f, 1f).let { it * it * (3 - 2 * it) }
 
-/** Tap Kid Space, open its boundary, then play and draw entirely within it. */
+/**
+ * Two spaces on one phone. The parent's apps are gathered into a container, a lock closes on it,
+ * and it slides off the left edge. A separate container named after the app slides in from the
+ * right with the child's apps. The two are never on screen as one, which is the whole promise.
+ */
 @Composable
 fun WelcomeIllustration() {
-    val progress = illustrationProgress()
-    val label = stringResource(R.string.app_name)
+    val progress = illustrationProgress(loopMillis = 5500)
+    val name = stringResource(R.string.app_name)
     val description = stringResource(R.string.welcome_animation_description)
-    val icons = listOf(LineIcons.Camera, LineIcons.Phone, LineIcons.Book, LineIcons.Clock,
-        LineIcons.Music, LineIcons.Sliders, LineIcons.Gamepad, LineIcons.Grid, LineIcons.Brush)
-        .map { rememberVectorPainter(it) }
+    val parentApps = listOf(LineIcons.Camera, LineIcons.Phone, LineIcons.Clock, LineIcons.Music, LineIcons.Sliders,
+        LineIcons.Grid, LineIcons.Home, LineIcons.Key, LineIcons.Search).map { rememberVectorPainter(it) }
+    val kidApps = listOf(LineIcons.Gamepad, LineIcons.Brush, LineIcons.Book, LineIcons.Music).map { rememberVectorPainter(it) }
+    val kidTints = listOf(Color(0xFFDCD5F5), Color(0xFFFFDFCA), Color(0xFFD5E2FF), Color(0xFFFCE7B2))
     val lock = rememberVectorPainter(LineIcons.Lock)
-    val textPaint = remember {
-        Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            textSize = 13f
-            typeface = Typeface.create("sans-serif", Typeface.BOLD)
-            textAlign = Paint.Align.CENTER
-            color = ParentColors.ink.toArgb()
-        }
-    }
     Canvas(Modifier.fillMaxWidth().aspectRatio(1.03f).clearAndSetSemantics { contentDescription = description }) {
         val t = progress.value
-        val open = smooth((t - 0.20f) / 0.13f) * (1 - smooth((t - 0.89f) / 0.10f))
-        val child = smooth((open - 0.75f) / 0.25f)
+        // The parent's side: boxed, locked, sent left. It fades back in place to restart the loop.
+        val leaving = t < 0.6f
+        val boxed = if (leaving) seg(t, 0.10f, 0.20f) else 0f
+        val locked = if (leaving) seg(t, 0.22f, 0.30f) else 0f
+        val parentShift = if (leaving) -190f * seg(t, 0.36f, 0.52f) else 0f
+        val parentAlpha = if (leaving) 1f else seg(t, 0.94f, 1f)
+        // The child's side: arrives from the right as the other one goes.
+        val kidShift = 190f * (1 - seg(t, 0.42f, 0.58f))
+        val kidAlpha = 1 - seg(t, 0.90f, 0.96f)
         scale(size.width / 360f, pivot = Offset.Zero) {
             drawCircle(ParentColors.blueSoft, 130f, Offset(180f, 172f))
             drawOval(ParentColors.border.copy(alpha = 0.55f), Offset(95f, 329f), Size(170f, 12f))
-            // Personal apps remain outside the child's bounded area.
-            drawRoundRect(Color.White, Offset(24f, 95f), Size(48f, 48f), CornerRadius(15f))
-            glyph(icons[0], 36f, 107f, 24f, ParentColors.muted)
-            drawRoundRect(Color.White, Offset(289f, 210f), Size(48f, 48f), CornerRadius(15f))
-            glyph(icons[1], 301f, 222f, 24f, ParentColors.muted)
-            drawRoundRect(ParentColors.ink, Offset(91f, 6f), Size(178f, 321f), CornerRadius(30f))
-            drawRoundRect(Color.White, Offset(97f, 12f), Size(166f, 309f), CornerRadius(25f))
-            drawRoundRect(ParentColors.ink, Offset(157f, 21f), Size(46f, 5f), CornerRadius(3f))
-            drawRoundRect(ParentColors.border, Offset(153f, 307f), Size(54f, 4f), CornerRadius(2f))
-            // The parent's ordinary home, with Kid Space as one recognizable app.
-            for (index in icons.indices) {
-                val x = 115f + (index % 3) * 45f
-                val y = 70f + (index / 3) * 52f
-                val special = index == 7
-                drawRoundRect(if (special) ParentColors.accent else ParentColors.sageSoft,
-                    Offset(x, y), Size(36f, 36f), CornerRadius(11f), alpha = 1 - open)
-                glyph(icons[index], x + 8f, y + 8f, 20f,
-                    if (special) Color.White else ParentColors.muted, 1 - open)
-            }
-            textPaint.alpha = ((1 - open) * 255).toInt()
-            drawContext.canvas.nativeCanvas.drawText(label, 178f, 229f, textPaint)
-            // The app icon grows into a space inside the phone, never a separate device/account.
-            if (open > 0f) {
-                val x = 160f + (105f - 160f) * open
-                val y = 174f + (49f - 174f) * open
-                val w = 36f + 114f * open
-                val h = 36f + 210f * open
-                drawRoundRect(ParentColors.preview, Offset(x, y), Size(w, h), CornerRadius(16f), alpha = open)
-                drawRoundRect(ParentColors.accent, Offset(x, y), Size(w, h), CornerRadius(16f), style = Stroke(2f), alpha = open)
-            }
-            if (child > 0f) {
-                textPaint.alpha = (child * 255).toInt()
-                drawContext.canvas.nativeCanvas.drawText(label, 180f, 78f, textPaint)
-                val colors = listOf(Color(0xFFDCD5F5), Color(0xFFFFDFCA), Color(0xFFD5E2FF))
-                for ((i, iconIndex) in listOf(6, 8, 2).withIndex()) {
-                    val x = 117f + i * 43f
-                    drawRoundRect(Color.White, Offset(x, 96f), Size(39f, 47f), CornerRadius(12f), alpha = child)
-                    drawCircle(colors[i], 14f, Offset(x + 19.5f, 119f), alpha = child)
-                    glyph(icons[iconIndex], x + 9.5f, 109f, 20f, ParentColors.ink, child)
+            box(ParentColors.ink, 91f, 6f, 178f, 321f, 30f)
+            box(Color.White, 97f, 12f, 166f, 309f, 25f)
+            box(ParentColors.ink, 157f, 21f, 46f, 5f, 3f)
+            box(ParentColors.border, 153f, 307f, 54f, 4f, 2f)
+            clipRect(97f, 30f, 263f, 302f) {
+                translate(left = parentShift) {
+                    box(ParentColors.bg, 107f, 56f, 146f, 190f, 18f, boxed * parentAlpha)
+                    drawRoundRect(ParentColors.ink, Offset(107f, 56f), Size(146f, 190f), CornerRadius(18f),
+                        style = Stroke(2f), alpha = boxed * parentAlpha)
+                    for (index in parentApps.indices) {
+                        val x = 118f + (index % 3) * 44f
+                        // The grid tightens a little as the box closes around it.
+                        val y = 76f + (index / 3) * (50f - 6f * boxed)
+                        box(ParentColors.sage, x, y, 36f, 36f, 11f, parentAlpha)
+                        glyph(parentApps[index], x + 8f, y + 8f, 20f, ParentColors.muted, parentAlpha)
+                    }
+                    if (locked > 0f) {
+                        val pop = locked * (1 + 0.2f * sin(locked * PI).toFloat())
+                        drawCircle(ParentColors.ink, 15f * pop, Offset(180f, 222f), alpha = locked)
+                        glyph(lock, 172f, 214f, 16f, Color.White, locked)
+                    }
                 }
-                // A little drawing activity stays visibly contained in the mint boundary.
-                drawRoundRect(Color.White.copy(alpha = child), Offset(117f, 157f), Size(126f, 101f), CornerRadius(12f))
-                val drawAmount = smooth((t - 0.40f) / 0.30f)
-                val path = Path()
-                var tip = Offset(130f, 217f)
-                val samples = (drawAmount * 70).toInt()
-                for (i in 0..samples) {
-                    val f = i / 70f
-                    tip = Offset(130 + 99 * f, 214 - sin(f * PI * 3).toFloat() * 20)
-                    if (i == 0) path.moveTo(tip.x, tip.y) else path.lineTo(tip.x, tip.y)
+                if (kidAlpha > 0f && kidShift < 190f) {
+                    translate(left = kidShift) {
+                        box(ParentColors.preview, 107f, 56f, 146f, 190f, 18f, kidAlpha)
+                        drawRoundRect(ParentColors.accent, Offset(107f, 56f), Size(146f, 190f), CornerRadius(18f),
+                            style = Stroke(2f), alpha = kidAlpha)
+                        label(name, 180f, 86f, 14f, ParentColors.ink, bold = true, alpha = kidAlpha, center = true, maxWidth = 126f)
+                        for (index in kidApps.indices) {
+                            val shown = seg(t, 0.56f + 0.04f * index, 0.64f + 0.04f * index) * kidAlpha
+                            val x = 121f + (index % 2) * 62f
+                            val y = 104f + (index / 2) * 64f
+                            box(Color.White, x, y, 56f, 56f, 16f, shown)
+                            drawCircle(kidTints[index], 19f * shown, Offset(x + 28f, y + 28f), alpha = shown)
+                            glyph(kidApps[index], x + 17f, y + 17f, 22f, ParentColors.ink, shown)
+                        }
+                    }
                 }
-                drawPath(path, ParentColors.accent, style = Stroke(4f, cap = StrokeCap.Round), alpha = child)
-                if (t in 0.40f..0.78f) {
-                    drawCircle(ParentColors.blueSoft, 11f, tip, alpha = child)
-                    drawCircle(ParentColors.accent, 5f, tip, alpha = child)
-                }
-                drawCircle(Color(0xFFF1B75C), 7f,
-                    Offset(137f + 82f * smooth((t - 0.68f) / 0.17f), 176f - sin(smooth((t - 0.68f) / 0.17f) * PI).toFloat() * 10), alpha = child)
-                glyph(lock, 173f, 271f, 14f, ParentColors.ink, child)
             }
-            // A fingertip comes in and presses the app icon, like a screen recording.
-            val at = mix(Offset(262f, 318f), Offset(184f, 198f), seg(t, 0.02f, 0.11f))
-            finger(at, press(t, 0.14f), seg(t, 0.01f, 0.05f) * (1 - seg(t, 0.20f, 0.27f)))
         }
     }
 }

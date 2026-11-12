@@ -129,7 +129,7 @@
     <string name="guard_service_label">Kid Space app protection</string>
     <string name="guard_service_summary">Keeps a child inside the apps you approved while Kid mode is on.</string>
     <string name="guard_service_description">Kid Space uses this service for parental control. While kid mode is on, it sees which app is in front and returns to the child’s home screen if that app is not one you approved. It does not read what is on the screen, and nothing leaves this phone. It does nothing while kid mode is off.</string>
-    <string name="welcome_animation_description">A tap on Kid Space opens a bounded area inside a phone. Games and drawing stay inside; other apps remain outside.</string>
+    <string name="welcome_animation_description">Your own apps go into a locked container that slides off the screen. A separate Kid Space with the child’s apps takes its place.</string>
     <string name="guard_guide_description">In Accessibility, open Downloaded apps, choose Kid Space app protection, switch on Use Kid Space app protection, then tap Allow.</string>
     <string name="guide_accessibility">Accessibility</string>
     <string name="guide_downloaded">Downloaded apps</string>

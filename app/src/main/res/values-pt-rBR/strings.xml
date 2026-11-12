@@ -100,7 +100,7 @@
     <string name="guard_service_label">Proteção de apps do Kid Space</string>
     <string name="guard_service_summary">Mantém a criança dentro dos apps que você aprovou enquanto o modo criança está ativado.</string>
     <string name="guard_service_description">O Kid Space usa este serviço para controle parental. Enquanto o modo criança está ativado, ele vê qual app está em primeiro plano e volta para a tela inicial da criança se esse app não for um dos que você aprovou. Ele não lê o que está na tela e nada sai deste celular. Não faz nada quando o modo criança está desativado.</string>
-    <string name="welcome_animation_description">Um toque no Kid Space abre uma área delimitada dentro do celular. Jogos e desenho ficam dentro; os outros apps ficam fora.</string>
+    <string name="welcome_animation_description">Seus apps entram em um contêiner trancado que sai da tela. No lugar dele aparece um Kid Space separado com os apps da criança.</string>
     <string name="guard_guide_description">Em Acessibilidade, abra Apps transferidos por download, escolha Proteção de apps do Kid Space, ative Usar Proteção de apps do Kid Space e toque em Permitir.</string>
     <string name="guide_accessibility">Acessibilidade</string>
     <string name="guide_downloaded">Apps transferidos por download</string>

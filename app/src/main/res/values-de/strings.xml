@@ -100,7 +100,7 @@
     <string name="guard_service_label">Kid Space App-Schutz</string>
     <string name="guard_service_summary">Hält ein Kind in den Apps, die du freigegeben hast, solange der Kindermodus an ist.</string>
     <string name="guard_service_description">Kid Space nutzt diesen Dienst für die Kindersicherung. Solange der Kindermodus an ist, sieht er, welche App im Vordergrund ist, und kehrt zum Startbildschirm des Kindes zurück, wenn du diese App nicht freigegeben hast. Er liest nicht, was auf dem Bildschirm steht, und nichts verlässt dieses Handy. Wenn der Kindermodus aus ist, tut er nichts.</string>
-    <string name="welcome_animation_description">Ein Tippen auf Kid Space öffnet einen abgegrenzten Bereich im Handy. Spiele und Malen bleiben drinnen, andere Apps bleiben draußen.</string>
+    <string name="welcome_animation_description">Deine Apps kommen in einen verschlossenen Behälter, der aus dem Bildschirm gleitet. Ein getrennter Kid Space mit den Apps des Kindes nimmt seinen Platz ein.</string>
     <string name="guard_guide_description">Öffne unter Bedienungshilfen den Punkt Heruntergeladene Apps, wähle Kid Space App-Schutz, aktiviere Kid Space App-Schutz verwenden und tippe auf Zulassen.</string>
     <string name="guide_accessibility">Bedienungshilfen</string>
     <string name="guide_downloaded">Heruntergeladene Apps</string>

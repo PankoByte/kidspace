@@ -97,7 +97,7 @@
     <string name="guard_service_label">Perlindungan aplikasi Kid Space</string>
     <string name="guard_service_summary">Menjaga anak tetap di dalam aplikasi yang Anda setujui selama mode anak aktif.</string>
     <string name="guard_service_description">Kid Space memakai layanan ini untuk kontrol orang tua. Selama mode anak aktif, layanan ini melihat aplikasi mana yang sedang dibuka dan kembali ke layar utama anak jika aplikasi itu bukan yang Anda setujui. Layanan ini tidak membaca isi layar, dan tidak ada yang keluar dari ponsel ini. Layanan ini tidak melakukan apa pun saat mode anak nonaktif.</string>
-    <string name="welcome_animation_description">Ketukan pada Kid Space membuka area terbatas di dalam ponsel. Game dan menggambar tetap di dalam; aplikasi lain tetap di luar.</string>
+    <string name="welcome_animation_description">Aplikasi Anda masuk ke wadah terkunci yang bergeser keluar layar. Kid Space terpisah berisi aplikasi anak menggantikannya.</string>
     <string name="guard_guide_description">Di Aksesibilitas, buka Aplikasi yang didownload, pilih Perlindungan aplikasi Kid Space, aktifkan Gunakan Perlindungan aplikasi Kid Space, lalu ketuk Izinkan.</string>
     <string name="guide_accessibility">Aksesibilitas</string>
     <string name="guide_downloaded">Aplikasi yang didownload</string>

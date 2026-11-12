@@ -97,7 +97,7 @@
     <string name="guard_service_label">Kid Space 应用保护</string>
     <string name="guard_service_summary">儿童模式开启期间，让孩子只能使用你批准的应用。</string>
     <string name="guard_service_description">Kid Space 使用此服务进行家长控制。儿童模式开启期间，它会查看当前显示的是哪个应用；如果该应用未经你批准，就返回孩子的主屏幕。它不会读取屏幕上的内容，任何数据都不会离开这部手机。儿童模式关闭时，它不执行任何操作。</string>
-    <string name="welcome_animation_description">点按 Kid Space 会在手机里打开一个有边界的区域。游戏和画画留在里面，其他应用留在外面。</string>
+    <string name="welcome_animation_description">你自己的应用被收进一个上锁的容器并滑出屏幕。取而代之的是一个单独的 Kid Space，里面是孩子的应用。</string>
     <string name="guard_guide_description">在“无障碍”中打开“已下载的应用”，选择“Kid Space 应用保护”，开启“使用 Kid Space 应用保护”，然后点按“允许”。</string>
     <string name="guide_accessibility">无障碍</string>
     <string name="guide_downloaded">已下载的应用</string>
