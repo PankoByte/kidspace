@@ -1,0 +1,154 @@
+<resources>
+    <string name="app_name" translatable="false">Kid Space</string>
+    <string name="welcome_title">Their own space.\nOn your phone.</string>
+    <string name="preview_title">Their space</string>
+    <string name="home_edit_apps">Edit apps</string>
+    <!-- Same wording as the Android prompt that follows, so the parent recognises it. -->
+    <string name="handoff_title">Set Kid Space as your default home app</string>
+    <string name="handoff_choice">Android asks this next. Choose Kid Space, then tap Set as default.</string>
+    <string name="handoff_confirm">Open home settings</string>
+    <string name="handoff_cancel">Not yet</string>
+    <string name="apps_continue">Set a time limit</string>
+    <string name="time_continue">Set up protection</string>
+    <string name="guard_continue">Create parent PIN</string>
+
+    <!-- Shared actions -->
+    <string name="action_done">Done</string>
+    <string name="action_back">Back</string>
+    <string name="setup_step">Step %1$d of %2$d</string>
+
+    <!-- Setup step 1: what the app does -->
+    <string name="welcome_start">Create your Kid Space</string>
+
+    <!-- Protection: purpose, visual settings guide, and compact disclosure. -->
+    <string name="guard_title">Turn on app protection</string>
+    <string name="guard_body">Keeps your child inside the apps you choose.</string>
+    <!-- The app name inside this sentence is shown in bold. -->
+    <!-- Shown instead of guard_hint when Android lists the guard as on but has not started it. -->
+    <string name="guard_stuck">Switch app protection off, then on again to reconnect.</string>
+    <string name="guard_agree">Agree and open settings</string>
+    <string name="guard_on_title">App protection is ready</string>
+
+    <!-- Setup step 3: choose apps -->
+    <string name="apps_title">What can they open?</string>
+    <string name="apps_search">Search apps</string>
+    <string name="apps_search_clear">Clear search</string>
+    <string name="apps_suggested">Games &amp; learning</string>
+    <string name="apps_others">Other apps</string>
+    <string name="apps_all">All apps</string>
+    <string name="apps_no_match">No apps match “%s”</string>
+    <string name="apps_none_selected">Choose at least one app</string>
+    <!-- Follows the number of chosen apps, which is drawn in a badge. -->
+    <plurals name="apps_chosen">
+        <item quantity="one">app chosen</item>
+        <item quantity="other">apps chosen</item>
+    </plurals>
+
+    <!-- Setup step 4: play time -->
+    <string name="time_title">Set a time limit</string>
+    <string name="time_minutes">%d min</string>
+    <plurals name="time_minutes_long">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <plurals name="time_hours">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+    <string name="time_hour_and_half">1.5 hours</string>
+    <string name="time_hours_minutes">%1$d h %2$d min</string>
+    <string name="time_none">No limit</string>
+    <string name="time_custom">Custom time</string>
+    <string name="time_less">Less time</string>
+    <string name="time_more">More time</string>
+
+    <!-- PIN creation: setup step 5, and Change PIN -->
+    <string name="pin_create_title">Create a parent PIN</string>
+    <string name="pin_create_body">Remember these 4 digits to get back to your phone.</string>
+    <string name="pin_confirm_title">Confirm your PIN</string>
+    <string name="pin_new_title">Choose a new PIN</string>
+    <string name="pin_mismatch">PINs didn\'t match. Start again.</string>
+    <string name="pin_change_header">Change PIN</string>
+    <string name="pin_current_title">Enter your current PIN</string>
+    <!-- Read out by screen readers in place of the dots. -->
+    <string name="pin_progress">%1$d of %2$d digits entered</string>
+
+    <!-- PIN lock after too many wrong tries -->
+    <string name="pin_locked_title">Too many wrong tries</string>
+    <string name="pin_locked_body">Try again in</string>
+    <string name="pin_locked_spoken">%1$d min %2$d sec</string>
+
+    <!-- Parent home -->
+    <string name="home_apps_label">Allowed apps</string>
+    <string name="home_choose">Choose</string>
+    <string name="home_apps_none">No apps yet</string>
+    <string name="home_apps_none_body">Choose at least one.</string>
+    <string name="home_time_label">Session limit</string>
+    <string name="home_guard_off">App protection needs attention</string>
+    <string name="home_guard_off_body">Enable it to keep other apps out of reach before handing over.</string>
+    <string name="home_guard_fix">Set up app protection</string>
+    <string name="home_start">Start kid mode</string>
+    <string name="home_refused_title">Kid mode didn\'t start</string>
+    <string name="home_refused_body">Choose Kid Space as the home app to start.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_extras">Optional</string>
+    <string name="settings_dnd">Silence notifications</string>
+    <string name="home_dnd_body">Optional. Calls still ring.</string>
+    <string name="settings_backup">Backup guard</string>
+    <string name="settings_backup_body">A second check, in case the guard stops.</string>
+    <string name="settings_protection">Protection</string>
+    <string name="settings_guard">App protection</string>
+    <string name="settings_guard_on">On</string>
+    <string name="settings_guard_off">Off</string>
+    <string name="settings_pin">Parent PIN</string>
+    <string name="settings_change_pin">Change PIN</string>
+
+    <!-- Kid mode: kid-facing screens -->
+    <string name="kid_greeting">Hi there!</string>
+    <string name="kid_low_title">Nearly done!</string>
+    <string name="kid_minutes">%d min</string>
+    <string name="kid_left">left</string>
+    <string name="kid_grown_ups">Parents</string>
+    <string name="times_up_title">Time\'s up!</string>
+    <string name="times_up_body">Ask a grown-up</string>
+    <string name="parent_more">15 more minutes</string>
+    <string name="parent_leave">Leave Kid mode</string>
+
+    <!-- Kid mode: PIN screen -->
+    <string name="pin_title">Enter parent PIN</string>
+    <string name="pin_wrong">Wrong PIN. Try again.</string>
+    <string name="pin_back">Back to Kid mode</string>
+    <string name="pin_emergency">Emergency</string>
+    <string name="cd_backspace">Delete</string>
+
+    <!-- Kid mode: services -->
+    <string name="kid_notification_channel">Kid mode</string>
+    <string name="kid_notification_title">Kid mode is on</string>
+    <string name="guard_service_label">Kid Space app protection</string>
+    <string name="guard_service_summary">Keeps a child inside the apps you approved while Kid mode is on.</string>
+    <string name="guard_service_description">Kid Space uses this service for parental control. While kid mode is on, it sees which app is in front and returns to the child’s home screen if that app is not one you approved. It does not read what is on the screen, and nothing leaves this phone. It does nothing while kid mode is off.</string>
+    <string name="welcome_animation_description">A tap on Kid Space opens a bounded area inside a phone. Games and drawing stay inside; other apps remain outside.</string>
+    <string name="guard_guide_description">In Accessibility, open Downloaded apps, choose Kid Space app protection, switch on Use Kid Space app protection, then tap Allow.</string>
+    <string name="guide_accessibility">Accessibility</string>
+    <string name="guide_downloaded">Downloaded apps</string>
+    <string name="guide_use_protection">Use Kid Space app protection</string>
+    <string name="guide_allow">Allow</string>
+    <!-- Written steps under the looping demo of Android settings. -->
+    <string name="guide_step_open">Tap Kid Space app protection</string>
+    <string name="guide_step_switch">Switch it on</string>
+    <string name="guide_step_allow">Tap Allow</string>
+    <string name="guide_default">Set as default</string>
+
+    <!-- Pop-up before Android's Do Not Disturb access list, with its looping demo. -->
+    <string name="dnd_guide_title">Let Kid Space silence notifications</string>
+    <string name="dnd_guide_open">Open settings</string>
+    <string name="guide_dnd_screen">Do Not Disturb access</string>
+    <string name="guide_dnd_toggle">Allow Do Not Disturb</string>
+    <string name="guide_step_tap_app">Tap Kid Space</string>
+    <string name="dnd_guide_description">In %1$s, tap Kid Space, switch on %2$s, then tap Allow.</string>
+    <!-- Android 15 and up renamed Do Not Disturb access to Modes access. -->
+    <string name="guide_modes_screen">Modes access</string>
+    <string name="guide_modes_toggle">Allow Modes access</string>
+</resources>

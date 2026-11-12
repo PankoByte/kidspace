@@ -1,0 +1,31 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+/.codex-qa/
+
+# IDE and tool state
+/.idea/
+/.kotlin/
+/graphify-out/
+
+# Build outputs and signing keys
+*.apk
+*.aab
+*.jks
+*.keystore
+keystore.properties
+
+# Design reference files, kept outside the repo
+*.pdf

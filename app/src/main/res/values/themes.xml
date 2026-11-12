@@ -1,0 +1,9 @@
+<resources>
+    <!-- Every screen paints its own background. The window colour matches the kid home,
+         so the first frame after a restart in Kid mode never flashes a parent colour. -->
+    <style name="Theme.Launcher" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Same as KidColors.sky. -->
+    <color name="window_background">#FFCFE4E7</color>
+</resources>
